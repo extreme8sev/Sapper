@@ -69,6 +69,7 @@ namespace WindowsFormsApplication1
                 if (_field[x, y].Value == 0)
                 {
                     ExpandZeroes();
+                    DrawAllCells();
                 }
                 else if (_isFirstClick)
                 {
@@ -106,101 +107,26 @@ namespace WindowsFormsApplication1
         private void ExpandZeroes()
         {
             var counter = 0;
-            //Раскрываем нули 
+            //Раскрываем нули цепной реакцией 
             for (int i = 0; i < FieldSqX; i++)
             {
                 for (int j = 0; j < FieldSqY; j++)
                 {
                     if (_field[i, j].Value == 0 && _field[i, j].IsOpened)
                     {
-                        if (j < FieldSqY - 1 && !_field[i, j + 1].IsOpened)
+                        Cell[] neighborsArray = GetNeighbors(i, j);
+                        for (var v = 0; v < 8; v++)
                         {
-                            if (_field[i, j + 1].Value == 0)
+                            if (neighborsArray[v]?.Value == 0)
+                            {
+                                if (!neighborsArray[v].IsOpened)
                                 {
-                                   counter++;
+                                    counter++;
                                 }
-
-                            _field[i, j + 1].Open();
-                            DrawOneCell(i, j + 1);
+                            }
+                            neighborsArray[v]?.Open();
                         }
-
-                    if (j > 0 && !_field[i, j - 1].IsOpened)
-                    {
-                        if (_field[i, j - 1].Value == 0)
-                            {
-                                counter++;
-                            }
-
-                         _field[i, j - 1].Open();
-                         DrawOneCell(i, j - 1);
                     }
-
-                    if (i < FieldSqX - 1 && !_field[i + 1, j].IsOpened)
-                    {
-                        if (_field[i + 1, j].Value == 0)
-                            {
-                                counter++;
-                            }
-
-                         _field[i + 1, j].Open();
-                         DrawOneCell(i + 1, j);
-                    }
-
-                    if (i > 0 && !_field[i - 1, j].IsOpened)
-                    {
-                        if (_field[i - 1, j].Value == 0)
-                            {
-                                counter++;
-                            }
-
-                        _field[i - 1, j].Open();
-                        DrawOneCell(i - 1, j);
-                    }
-
-                    if (i < FieldSqX - 1 && j < FieldSqY - 1 && !_field[i + 1, j + 1].IsOpened)
-                    {
-                        if (_field[i + 1, j + 1].Value == 0)
-                            {
-                                counter++;
-                            }
-
-                        _field[i + 1, j + 1].Open();
-                        DrawOneCell(i + 1, j + 1);
-                    }
-
-                    if (i < FieldSqX - 1 && j > 0 && !_field[i + 1, j - 1].IsOpened)
-                    {
-                        if (_field[i + 1, j - 1].Value == 0)
-                            {
-                                counter++;
-                            }
-
-                        _field[i + 1, j - 1].Open();
-                        DrawOneCell(i + 1, j - 1);
-                    }
-
-                    if (i > 0 && j < FieldSqY - 1 && !_field[i - 1, j + 1].IsOpened)
-                    {
-                        if (_field[i - 1, j + 1].Value == 0)
-                            {
-                                counter++;
-                            }
-
-                        _field[i - 1, j + 1].Open();
-                        DrawOneCell(i - 1, j + 1);
-                    }
-
-                    if (i > 0 && j > 0 && !_field[i - 1, j - 1].IsOpened)
-                    {
-                        if (_field[i - 1, j - 1].Value == 0)
-                            {
-                                counter++;
-                            }
-
-                        _field[i - 1, j - 1].Open();
-                        DrawOneCell(i - 1, j - 1);
-                    }
-                }
                 }
             }
 
@@ -238,226 +164,10 @@ namespace WindowsFormsApplication1
                     if (_field[i, j].Value != 13)
                     {
                         var numberOfBomb = 0;
-                        if (i == 0) //Верхний ряд
+                        Cell[] neighborsArray = GetNeighbors(i,j);
+                        for (var v = 0; v < 8; v++)
                         {
-                            if (j == 0) //Верхний левый угол
-                            {
-                                if (_field[i + 1, j].Value == 13)
-                                {
-                                    numberOfBomb++;
-                                }
-
-                                if (_field[i, j + 1].Value == 13)
-                                {
-                                    numberOfBomb++;
-                                }
-
-                                if (_field[i + 1, j + 1].Value == 13)
-                                {
-                                    numberOfBomb++;
-                                }
-                            }
-                            else if (j == FieldSqY - 1) //Верхний правый угол
-                            {
-                                if (_field[i + 1, j].Value == 13)
-                                {
-                                    numberOfBomb++;
-                                }
-
-                                if (_field[i, j - 1].Value == 13)
-                                {
-                                    numberOfBomb++;
-                                }
-
-                                if (_field[i + 1, j - 1].Value == 13)
-                                {
-                                    numberOfBomb++;
-                                }
-                            }
-                            else
-                            {
-                                if (_field[i + 1, j].Value == 13)
-                                {
-                                    numberOfBomb++;
-                                }
-
-                                if (_field[i, j + 1].Value == 13)
-                                {
-                                    numberOfBomb++;
-                                }
-
-                                if (_field[i + 1, j + 1].Value == 13)
-                                {
-                                    numberOfBomb++;
-                                }
-
-                                if (_field[i, j - 1].Value == 13)
-                                {
-                                    numberOfBomb++;
-                                }
-
-                                if (_field[i + 1, j - 1].Value == 13)
-                                {
-                                    numberOfBomb++;
-                                }
-                            }
-                        }
-                        else if (i == FieldSqX - 1) //Нижний ряд
-                        {
-                            if (j == 0) //Нижний левый угол
-                            {
-                                if (_field[i - 1, j].Value == 13)
-                                {
-                                    numberOfBomb++;
-                                }
-
-                                if (_field[i, j + 1].Value == 13)
-                                {
-                                    numberOfBomb++;
-                                }
-
-                                if (_field[i - 1, j + 1].Value == 13)
-                                {
-                                    numberOfBomb++;
-                                }
-                            }
-                            else if (j == FieldSqY - 1) //Нижний правый угол
-                            {
-                                if (_field[i - 1, j].Value == 13)
-                                {
-                                    numberOfBomb++;
-                                }
-
-                                if (_field[i, j - 1].Value == 13)
-                                {
-                                    numberOfBomb++;
-                                }
-
-                                if (_field[i - 1, j - 1].Value == 13)
-                                {
-                                    numberOfBomb++;
-                                }
-                            }
-                            else
-                            {
-                                if (_field[i - 1, j].Value == 13)
-                                {
-                                    numberOfBomb++;
-                                }
-
-                                if (_field[i, j + 1].Value == 13)
-                                {
-                                    numberOfBomb++;
-                                }
-
-                                if (_field[i - 1, j + 1].Value == 13)
-                                {
-                                    numberOfBomb++;
-                                }
-
-                                if (_field[i, j - 1].Value == 13)
-                                {
-                                    numberOfBomb++;
-                                }
-
-                                if (_field[i - 1, j - 1].Value == 13)
-                                {
-                                    numberOfBomb++;
-                                }
-                            }
-                        }
-                        else if (j == 0) //Левый столбец
-                        {
-                            if (_field[i - 1, j].Value == 13)
-                            {
-                                numberOfBomb++;
-                            }
-
-                            if (_field[i - 1, j + 1].Value == 13)
-                            {
-                                numberOfBomb++;
-                            }
-
-                            if (_field[i, j + 1].Value == 13)
-                            {
-                                numberOfBomb++;
-                            }
-
-                            if (_field[i + 1, j + 1].Value == 13)
-                            {
-                                numberOfBomb++;
-                            }
-
-                            if (_field[i + 1, j].Value == 13)
-                            {
-                                numberOfBomb++;
-                            }
-                        }
-                        else if (j == FieldSqY - 1) //Правый столбец
-                        {
-                            if (_field[i - 1, j].Value == 13)
-                            {
-                                numberOfBomb++;
-                            }
-
-                            if (_field[i - 1, j - 1].Value == 13)
-                            {
-                                numberOfBomb++;
-                            }
-
-                            if (_field[i, j - 1].Value == 13)
-                            {
-                                numberOfBomb++;
-                            }
-
-                            if (_field[i + 1, j - 1].Value == 13)
-                            {
-                                numberOfBomb++;
-                            }
-
-                            if (_field[i + 1, j].Value == 13)
-                            {
-                                numberOfBomb++;
-                            }
-                        }
-                        else //Все остальное
-                        {
-                            if (_field[i + 1, j].Value == 13)
-                            {
-                                numberOfBomb++;
-                            }
-
-                            if (_field[i, j + 1].Value == 13)
-                            {
-                                numberOfBomb++;
-                            }
-
-                            if (_field[i + 1, j + 1].Value == 13)
-                            {
-                                numberOfBomb++;
-                            }
-
-                            if (_field[i, j - 1].Value == 13)
-                            {
-                                numberOfBomb++;
-                            }
-
-                            if (_field[i + 1, j - 1].Value == 13)
-                            {
-                                numberOfBomb++;
-                            }
-
-                            if (_field[i - 1, j].Value == 13)
-                            {
-                                numberOfBomb++;
-                            }
-
-                            if (_field[i - 1, j + 1].Value == 13)
-                            {
-                                numberOfBomb++;
-                            }
-
-                            if (_field[i - 1, j - 1].Value == 13)
+                            if (neighborsArray[v]?.Value == 13)
                             {
                                 numberOfBomb++;
                             }
@@ -553,9 +263,67 @@ namespace WindowsFormsApplication1
             DrawAllCells();
         }
 
-        private Cell[] GetNeighbors(int x, int y)
+        private Cell[] GetNeighbors(int i, int j) 
+        //Возвращает массив всех соседних клеток для заданной координатами i,j.
+        //Если клетка вышла за границу - ее место в массиве занимает null
         {
+            Cell[] neighborsArray = new Cell[8];
 
+            //----------------------------------------------
+            //Find all neighborhoods cells for _field[i,j]'s cell
+            var n = 0;
+
+            if (j < FieldSqY - 1)
+            {
+                neighborsArray[n] = _field[i, j + 1];
+            }
+            n++;
+
+            if (j > 0)
+            {
+                neighborsArray[n] = _field[i, j - 1];
+            }
+            n++;
+
+            if (i < FieldSqX - 1)
+            {
+                neighborsArray[n] = _field[i + 1, j];
+            }
+            n++;
+
+            if (i > 0 && !_field[i - 1, j].IsOpened)
+            {
+                neighborsArray[n] = _field[i - 1, j];
+            }
+            n++;
+
+
+            if (i < FieldSqX - 1 && j < FieldSqY - 1)
+            {
+                neighborsArray[n] = _field[i + 1, j + 1];
+            }
+            n++;
+
+
+            if (i < FieldSqX - 1 && j > 0)
+            {
+                neighborsArray[n] = _field[i + 1, j - 1];
+            }
+            n++;
+
+            if (i > 0 && j < FieldSqY - 1)
+            {
+                neighborsArray[n] = _field[i - 1, j + 1];
+            }
+            n++;
+
+            if (i > 0 && j > 0)
+            {
+                neighborsArray[n] = _field[i - 1, j - 1];
+            }
+            //----------------------------------------------
+
+            return neighborsArray;
         }
     }
 }
