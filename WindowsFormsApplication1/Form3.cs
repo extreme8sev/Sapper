@@ -32,7 +32,7 @@ namespace WindowsFormsApplication1
             pictureBoxGameField.Left = FieldLeft;
             pictureBoxGameField.BackColor = Color.LightGray;
             _gameFieldGraph = Graphics.FromHwnd(pictureBoxGameField.Handle);
-            label1.Text = "Осталось обнаружить: " + game1.numberOfBombLeft;
+            label1.Text = "Осталось обнаружить: " + game1.NumberOfBombLeft;
         }
 
         public void label1_text(string str)
@@ -72,6 +72,5 @@ namespace WindowsFormsApplication1
             _game1.DrawAllCells();
         }
 
-        
     }
 }

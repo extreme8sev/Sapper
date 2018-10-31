@@ -23,7 +23,7 @@ namespace WindowsFormsApplication1
         private readonly Font _userFont = new Font("Times New Roman", 15);
         private readonly Brush _userLightGreyBrush = Brushes.LightGray;
         private bool _isFirstClick;
-        public int numberOfBombLeft;
+        public int NumberOfBombLeft;
 
 
         public Sapper(Graphics grf)
@@ -42,12 +42,20 @@ namespace WindowsFormsApplication1
         {
             for (var i = 0; i < FieldSqX + 1; i++)
             {
-                _gameFieldGraph.DrawLine(_userBlack, i * SquareF + 5, 5, i * SquareF + 5, SquareF * FieldSqY + 5);
+                _gameFieldGraph.DrawLine(_userBlack, 
+                                        i * SquareF + 5,
+                                        5,
+                                        i * SquareF + 5,
+                                        SquareF * FieldSqY + 5);
             }
 
             for (var i = 0; i < FieldSqY + 1; i++)
             {
-                _gameFieldGraph.DrawLine(_userBlack, 5, i * SquareF + 5, SquareF * FieldSqX + 5, i * SquareF + 5);
+                _gameFieldGraph.DrawLine(_userBlack,
+                                        5,
+                                        i * SquareF + 5,
+                                        SquareF * FieldSqX + 5,
+                                        i * SquareF + 5);
             }
         }
 
@@ -67,7 +75,6 @@ namespace WindowsFormsApplication1
                     RandomizeBomb();
                     ClickThisPoint(point);
                 }
-
                 DrawOneCell(x, y);
                 _isFirstClick = false;
             }
@@ -81,18 +88,18 @@ namespace WindowsFormsApplication1
             {
                 if (_field[x, y].IsSelected)
                 {
-                    numberOfBombLeft++;
+                    NumberOfBombLeft++;
                 }
                 else
                 {
-                    numberOfBombLeft--;
+                    NumberOfBombLeft--;
                 }
 
                 _field[x, y].Select();
                 DrawOneCell(x, y);
             }
 
-            return numberOfBombLeft;
+            return NumberOfBombLeft;
         }
 
 
@@ -105,17 +112,17 @@ namespace WindowsFormsApplication1
                 for (int j = 0; j < FieldSqY; j++)
                 {
                     if (_field[i, j].Value == 0 && _field[i, j].IsOpened)
-                {
-                    if (j < FieldSqY - 1 && !_field[i, j + 1].IsOpened)
                     {
-                        if (_field[i, j + 1].Value == 0)
-                            {
-                                counter++;
-                            }
+                        if (j < FieldSqY - 1 && !_field[i, j + 1].IsOpened)
+                        {
+                            if (_field[i, j + 1].Value == 0)
+                                {
+                                   counter++;
+                                }
 
                             _field[i, j + 1].Open();
-                        DrawOneCell(i, j + 1);
-                    }
+                            DrawOneCell(i, j + 1);
+                        }
 
                     if (j > 0 && !_field[i, j - 1].IsOpened)
                     {
@@ -124,8 +131,8 @@ namespace WindowsFormsApplication1
                                 counter++;
                             }
 
-                            _field[i, j - 1].Open();
-                        DrawOneCell(i, j - 1);
+                         _field[i, j - 1].Open();
+                         DrawOneCell(i, j - 1);
                     }
 
                     if (i < FieldSqX - 1 && !_field[i + 1, j].IsOpened)
@@ -135,62 +142,62 @@ namespace WindowsFormsApplication1
                                 counter++;
                             }
 
-                            _field[i + 1, j].Open();
-                        DrawOneCell(i + 1, j);
+                         _field[i + 1, j].Open();
+                         DrawOneCell(i + 1, j);
                     }
 
-                    if (i > 0 && !_field[i - 1, j].IsSelected)
+                    if (i > 0 && !_field[i - 1, j].IsOpened)
                     {
                         if (_field[i - 1, j].Value == 0)
                             {
                                 counter++;
                             }
 
-                            _field[i - 1, j].Open();
+                        _field[i - 1, j].Open();
                         DrawOneCell(i - 1, j);
                     }
 
-                    if (i < FieldSqX - 1 && j < FieldSqY - 1 && !_field[i + 1, j + 1].IsSelected)
+                    if (i < FieldSqX - 1 && j < FieldSqY - 1 && !_field[i + 1, j + 1].IsOpened)
                     {
                         if (_field[i + 1, j + 1].Value == 0)
                             {
                                 counter++;
                             }
 
-                            _field[i + 1, j + 1].Open();
+                        _field[i + 1, j + 1].Open();
                         DrawOneCell(i + 1, j + 1);
                     }
 
-                    if (i < FieldSqX - 1 && j > 0 && !_field[i + 1, j - 1].IsSelected)
+                    if (i < FieldSqX - 1 && j > 0 && !_field[i + 1, j - 1].IsOpened)
                     {
                         if (_field[i + 1, j - 1].Value == 0)
                             {
                                 counter++;
                             }
 
-                            _field[i + 1, j - 1].Open();
+                        _field[i + 1, j - 1].Open();
                         DrawOneCell(i + 1, j - 1);
                     }
 
-                    if (i > 0 && j < FieldSqY - 1 && !_field[i - 1, j + 1].IsSelected)
+                    if (i > 0 && j < FieldSqY - 1 && !_field[i - 1, j + 1].IsOpened)
                     {
                         if (_field[i - 1, j + 1].Value == 0)
                             {
                                 counter++;
                             }
 
-                            _field[i - 1, j + 1].Open();
+                        _field[i - 1, j + 1].Open();
                         DrawOneCell(i - 1, j + 1);
                     }
 
-                    if (i > 0 && j > 0 && !_field[i - 1, j - 1].IsSelected)
+                    if (i > 0 && j > 0 && !_field[i - 1, j - 1].IsOpened)
                     {
                         if (_field[i - 1, j - 1].Value == 0)
                             {
                                 counter++;
                             }
 
-                            _field[i - 1, j - 1].Open();
+                        _field[i - 1, j - 1].Open();
                         DrawOneCell(i - 1, j - 1);
                     }
                 }
@@ -208,7 +215,7 @@ namespace WindowsFormsApplication1
         {
             ClearGameField();
             _isFirstClick = true; //Обнуляем счетчик первого клика
-            numberOfBombLeft = NumberOfBomb; //Обнуляем количество оставшихся бомб
+            NumberOfBombLeft = NumberOfBomb; //Обнуляем количество оставшихся бомб
             //расставляем бомбы
             var rnd = new Random();
             int x, y;
@@ -482,7 +489,7 @@ namespace WindowsFormsApplication1
                 _gameFieldGraph.FillRectangle(Brushes.Orange, 7 + x * SquareF, 7 + y * SquareF, SquareF - 4, SquareF - 4);
                 _gameFieldGraph.DrawString("!", _userFont, Brushes.Black, 7 + x * SquareF, 7 + y * SquareF);
             }
-            else if (!_field[x, y].IsSelected)
+            else if (!_field[x, y].IsOpened)
             {
                 _gameFieldGraph.FillRectangle(_userDarkGreyBrush, 7 + x * SquareF, 7 + y * SquareF, SquareF - 4, SquareF - 4);
             }
@@ -544,6 +551,11 @@ namespace WindowsFormsApplication1
             }
 
             DrawAllCells();
+        }
+
+        private Cell[] GetNeighbors(int x, int y)
+        {
+
         }
     }
 }
