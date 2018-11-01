@@ -3,25 +3,36 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using SapperApplication.Components;
 
 #endregion
 
-namespace WindowsFormsApplication1
+namespace SapperApplication.Forms
 {
     public partial class Form1 : Form
     {
+        #region Private Members
+
         private Bryozoa[] _bryozoaList;
         private Graphics _gameFieldGraph;
         private int _startX = -10;
         private int _startY = -10;
 
+        #endregion
+
+        #region  .ctor
 
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        #endregion
+
+        #region  Private Methods
+
+        private void Form1_Load(object sender,
+                                EventArgs e)
         {
             GameField.Height = 650;
             GameField.Width = 1120;
@@ -31,17 +42,25 @@ namespace WindowsFormsApplication1
             _gameFieldGraph = Graphics.FromHwnd(GameField.Handle);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender,
+                                   EventArgs e)
         {
-            var userBlack = new Pen(Color.Black, 2);
-            _gameFieldGraph.DrawRectangle(userBlack, _startX, _startY, 50, 50);
+            var userBlack = new Pen(Color.Black,
+                                    2);
+            _gameFieldGraph.DrawRectangle(userBlack,
+                                          _startX,
+                                          _startY,
+                                          50,
+                                          50);
             _startX += 50;
             _startY += 50;
         }
 
-        private void GameField_Click(object sender, EventArgs e)
+        private void GameField_Click(object sender,
+                                     EventArgs e)
         {
-            var cursorCoordination = new Point(Cursor.Position.X - GameField.Location.X - Left - 8, Cursor.Position.Y - GameField.Location.Y - Top - 30);
+            var cursorCoordination = new Point(Cursor.Position.X - GameField.Location.X - Left - 8,
+                                               Cursor.Position.Y - GameField.Location.Y - Top - 30);
             button1.Text = Left.ToString();
 
             if (cursorType.SelectedItem == cursorType.Items[1])
@@ -55,7 +74,11 @@ namespace WindowsFormsApplication1
                 else //Create another (not first) object
                 {
                     var tempArray = new Bryozoa[_bryozoaList.Length + 1];
-                    for (var i = 0; i < _bryozoaList.Length; i++) tempArray[i] = _bryozoaList[i];
+                    for (var i = 0; i < _bryozoaList.Length; i++)
+                    {
+                        tempArray[i] = _bryozoaList[i];
+                    }
+
                     tempArray[tempArray.Length - 1] = new Bryozoa(cursorCoordination);
                     _bryozoaList = tempArray;
                 }
@@ -65,9 +88,13 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender,
+                                   EventArgs e)
         {
-            if (_bryozoaList == null) return;
+            if (_bryozoaList == null)
+            {
+                return;
+            }
 
             foreach (var i in _bryozoaList)
             {
@@ -76,36 +103,13 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender,
+                                   EventArgs e)
         {
             var newDiffForm3 = new Form3();
             newDiffForm3.Show();
         }
-    }
 
-    internal class Bryozoa
-    {
-        private readonly Point _myCoordinate;
-        public int Radius = 25;
-        public int RadiusAct = 10;
-
-        public Bryozoa(Point myCoordinateCon)
-        {
-            _myCoordinate = myCoordinateCon;
-        }
-
-        public void DrawMyself(Graphics grField)
-        {
-            var userBlack = new Pen(Color.Black, 2);
-            grField.FillEllipse(Brushes.DarkOliveGreen, _myCoordinate.X - Radius, _myCoordinate.Y - Radius, 2 * Radius, 2 * Radius);
-            grField.DrawEllipse(userBlack, _myCoordinate.X - Radius, _myCoordinate.Y - Radius, 2 * Radius, 2 * Radius);
-        }
-
-        public void Activate(Graphics grField)
-        {
-            var userBlack = new Pen(Color.Black, 2);
-            grField.FillEllipse(Brushes.Crimson, _myCoordinate.X - RadiusAct, _myCoordinate.Y - RadiusAct, 2 * RadiusAct, 2 * RadiusAct);
-            grField.DrawEllipse(userBlack, _myCoordinate.X - RadiusAct, _myCoordinate.Y - RadiusAct, 2 * RadiusAct, 2 * RadiusAct);
-        }
+        #endregion
     }
 }

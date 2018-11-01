@@ -1,35 +1,50 @@
-﻿namespace WindowsFormsApplication1
+﻿namespace SapperApplication.Components
 {
     public class Cell
     {
-        public bool IsSelected { get; set; }
-        public byte Value { get; set; }
-        public bool IsOpened { get; set; }
+        #region  .ctor
 
         public Cell()
+            : this(0,
+                   false,
+                   false)
         {
-            Value = 0;
-            IsOpened = false;
-            IsSelected = false;
         }
 
         public Cell(byte value)
+            : this(value,
+                   false,
+                   false)
         {
-            Value = value;
-            IsOpened = false;
-            IsSelected = false;
         }
 
-        public Cell(byte value, bool isOpened, bool isSelected)
+        public Cell(byte value,
+                    bool isOpened,
+                    bool isSelected)
         {
             Value = value;
             IsOpened = isOpened;
             IsSelected = isSelected;
         }
 
+        #endregion
+
+        #region  Properties
+
+        public bool IsSelected { get; set; }
+        public byte Value { get; set; }
+        public bool IsOpened { get; set; }
+
+        #endregion
+
+        #region  Public Methods
+
         public void Open()
         {
-            if (!IsSelected) IsOpened = true;
+            if (!IsSelected)
+            {
+                IsOpened = true;
+            }
         }
 
         public void Close()
@@ -51,5 +66,7 @@
             IsOpened = false;
             IsSelected = false;
         }
+
+        #endregion
     }
 }
