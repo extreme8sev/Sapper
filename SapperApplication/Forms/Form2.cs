@@ -5,11 +5,17 @@ using System.Windows.Forms;
 
 #endregion
 
-namespace WindowsFormsApplication1
+namespace SapperApplication.Forms
 {
     public partial class Form2 : Form
     {
+        #region Private Members
+
         private readonly Form1 _form1;
+
+        #endregion
+
+        #region  .ctor
 
         public Form2()
         {
@@ -23,10 +29,17 @@ namespace WindowsFormsApplication1
             _form1.Enabled = false;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        #endregion
+
+        #region  Private Methods
+
+        private void button2_Click(object sender,
+                                   EventArgs e)
         {
             _form1.Enabled = true;
             Close();
         }
+
+        #endregion
     }
 }

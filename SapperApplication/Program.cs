@@ -2,13 +2,16 @@
 
 using System;
 using System.Windows.Forms;
+using SapperApplication.Forms;
 
 #endregion
 
-namespace WindowsFormsApplication1
+namespace SapperApplication
 {
     internal static class Program
     {
+        #region  Private Methods
+
         /// <summary>
         ///     The main entry point for the application.
         /// </summary>
@@ -19,5 +22,7 @@ namespace WindowsFormsApplication1
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
         }
+
+        #endregion
     }
 }

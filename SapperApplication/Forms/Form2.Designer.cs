@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication1
+﻿namespace SapperApplication.Forms
 {
     partial class Form2
     {
