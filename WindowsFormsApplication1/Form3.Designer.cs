@@ -53,6 +53,7 @@
             this.pictureBoxGameField.TabStop = false;
             this.pictureBoxGameField.Click += new System.EventHandler(this.pictureBoxGameField_Click);
             this.pictureBoxGameField.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxGameField_MouseDown);
+            this.pictureBoxGameField.DoubleClick += new System.EventHandler(this.pictureBoxGameField_DoubleClick);
             // 
             // button1
             // 
@@ -73,7 +74,7 @@
             this.Controls.Add(this.pictureBoxGameField);
             this.Controls.Add(this.label1);
             this.Name = "Form3";
-            this.Text = "Form3";
+            this.Text = "Find all bombs";
             this.Load += new System.EventHandler(this.Form3_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGameField)).EndInit();
             this.ResumeLayout(false);

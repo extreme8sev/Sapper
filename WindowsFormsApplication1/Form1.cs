@@ -81,6 +81,11 @@ namespace WindowsFormsApplication1
             var newDiffForm3 = new Form3();
             newDiffForm3.Show();
         }
+
+        private void GameField_DoubleClick(object sender, EventArgs e)
+        {
+
+        }
     }
 
     internal class Bryozoa

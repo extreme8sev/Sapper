@@ -56,7 +56,8 @@
             this.GameField.Size = new System.Drawing.Size(119, 83);
             this.GameField.TabIndex = 1;
             this.GameField.TabStop = false;
-            this.GameField.Click += new System.EventHandler(this.GameField_Click);
+            this.GameField.Click += new System.EventHandler(this.GameField_DoubleClick);
+            this.GameField.DoubleClick += new System.EventHandler(this.GameField_DoubleClick);
             // 
             // button2
             // 

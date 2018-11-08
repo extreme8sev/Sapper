@@ -103,6 +103,38 @@ namespace WindowsFormsApplication1
             return NumberOfBombLeft;
         }
 
+        public int OpenAllNeighbours(Point thisPoint)
+        {
+            var x = (thisPoint.X - 5) / SquareF;
+            var y = (thisPoint.Y - 5) / SquareF;
+            if (x >= 0 && y >= 0 && x < FieldSqX && y < FieldSqY && _field[x, y].IsOpened)
+            {
+                var NumberOfSelectedCells = 0;
+                Cell[] NeighboursArrey = GetNeighbors(x, y);
+                foreach (Cell cell in NeighboursArrey)
+                {
+                    if (cell != null && cell.IsSelected)
+                    {
+                        NumberOfSelectedCells++;
+                    }
+                }
+                if (NumberOfSelectedCells == _field[x, y].Value)
+                    foreach (Cell cell in NeighboursArrey)
+                    {
+                        if (cell != null && !cell.IsSelected && !cell.IsOpened)
+                        {
+                            cell.Open();
+                            if (cell.Value == 0)
+                            {
+                                ExpandZeroes();
+                            }
+                        }
+                    }
+                DrawAllCells();
+                return NumberOfSelectedCells;
+            }
+            return 0;
+        }
 
         private void ExpandZeroes()
         {

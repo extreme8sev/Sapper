@@ -61,7 +61,21 @@ namespace WindowsFormsApplication1
                         Cursor.Position.Y - pictureBoxGameField.Location.Y - Top - 30);
                     _game1.ClickThisPoint(cursorCoordination);
                 }
+
+                if (e.Button == MouseButtons.Middle)
+                {
+                    var cursorCoordination = new Point(Cursor.Position.X - pictureBoxGameField.Location.X - Left - 8,
+                        Cursor.Position.Y - pictureBoxGameField.Location.Y - Top - 30);
+                }
             }
+        }
+
+        private void pictureBoxGameField_DoubleClick(object sender, EventArgs e)
+        {
+            var cursorCoordination = new Point(Cursor.Position.X - pictureBoxGameField.Location.X - Left - 8,
+                Cursor.Position.Y - pictureBoxGameField.Location.Y - Top - 30);
+            _game1.OpenAllNeighbours(cursorCoordination);
+            //label1.Text = "I see double click";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -71,6 +85,5 @@ namespace WindowsFormsApplication1
             _game1.DrawGameFieldLines();
             _game1.DrawAllCells();
         }
-
     }
 }
