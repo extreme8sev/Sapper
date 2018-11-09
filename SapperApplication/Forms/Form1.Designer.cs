@@ -1,6 +1,6 @@
 ﻿namespace SapperApplication.Forms
 {
-    partial class Form1
+    public partial class Form1
     {
         /// <summary>
         /// Required designer variable.
@@ -34,6 +34,7 @@
             this.cursorSelector = new System.Windows.Forms.GroupBox();
             this.cursorType = new System.Windows.Forms.ComboBox();
             this.button3 = new System.Windows.Forms.Button();
+            this.SapperScoreLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.GameField)).BeginInit();
             this.cursorSelector.SuspendLayout();
             this.SuspendLayout();
@@ -100,11 +101,21 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // SapperScoreLabel
+            // 
+            this.SapperScoreLabel.AutoSize = true;
+            this.SapperScoreLabel.Location = new System.Drawing.Point(384, 13);
+            this.SapperScoreLabel.Name = "SapperScoreLabel";
+            this.SapperScoreLabel.Size = new System.Drawing.Size(35, 13);
+            this.SapperScoreLabel.TabIndex = 5;
+            this.SapperScoreLabel.Text = "label1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(911, 277);
+            this.Controls.Add(this.SapperScoreLabel);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.cursorSelector);
             this.Controls.Add(this.button2);
@@ -117,6 +128,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.GameField)).EndInit();
             this.cursorSelector.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -128,6 +140,7 @@
         private System.Windows.Forms.GroupBox cursorSelector;
         private System.Windows.Forms.ComboBox cursorType;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label SapperScoreLabel;
     }
 }
 

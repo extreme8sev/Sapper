@@ -20,6 +20,10 @@ namespace SapperApplication.Forms
 
         #endregion
 
+        #region Public Members
+        public ZooLogic CurrentZooGame;
+        public SapperGameUIManager CurrentSapperGameUIManager;
+        #endregion
         #region  .ctor
 
         public Form1()
@@ -40,6 +44,9 @@ namespace SapperApplication.Forms
             cursorSelector.Top = 50;
             cursorType.SelectedItem = cursorType.Items[0];
             _gameFieldGraph = Graphics.FromHwnd(GameField.Handle);
+            CurrentZooGame = new ZooLogic();
+            CurrentSapperGameUIManager = new SapperGameUIManager(this, CurrentZooGame);
+            CurrentSapperGameUIManager.WriteNumberOfSapperPoint();
         }
 
         private void button1_Click(object sender,
@@ -106,13 +113,27 @@ namespace SapperApplication.Forms
         private void button3_Click(object sender,
                                    EventArgs e)
         {
-            var newDiffForm3 = new Form3();
+            var newDiffForm3 = new Form3(this);
             newDiffForm3.Show();
+            CurrentSapperGameUIManager.WriteNumberOfSapperPoint();
         }
 
         private void GameField_DoubleClick(object sender, EventArgs e)
         {
 
+        }
+
+        #endregion
+
+        #region Public Methods
+        public void SetSapperScoreLabelText(String setString)
+        {
+            SapperScoreLabel.Text = setString;
+        }
+
+        public void SubscribeByCurrentSapperGameEvent(Sapper currentSapperGame)
+        {
+            CurrentSapperGameUIManager.SubscribeByCurrentSapperGameEvent(currentSapperGame);
         }
 
         #endregion

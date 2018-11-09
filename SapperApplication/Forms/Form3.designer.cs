@@ -48,12 +48,12 @@
             this.pictureBoxGameField.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.pictureBoxGameField.Location = new System.Drawing.Point(15, 35);
             this.pictureBoxGameField.Name = "pictureBoxGameField";
-            this.pictureBoxGameField.Size = new System.Drawing.Size(100, 50);
+            this.pictureBoxGameField.Size = new System.Drawing.Size(119, 59);
             this.pictureBoxGameField.TabIndex = 1;
             this.pictureBoxGameField.TabStop = false;
             this.pictureBoxGameField.Click += new System.EventHandler(this.pictureBoxGameField_Click);
-            this.pictureBoxGameField.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxGameField_MouseDown);
             this.pictureBoxGameField.DoubleClick += new System.EventHandler(this.pictureBoxGameField_DoubleClick);
+            this.pictureBoxGameField.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxGameField_MouseDown);
             // 
             // button1
             // 
@@ -67,14 +67,15 @@
             // 
             // Form3
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(534, 398);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBoxGameField);
             this.Controls.Add(this.label1);
             this.Name = "Form3";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Find all bombs";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.Form3_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGameField)).EndInit();
             this.ResumeLayout(false);

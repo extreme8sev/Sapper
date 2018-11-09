@@ -18,6 +18,7 @@ namespace SapperApplication.Forms
         private const string LEFT_TO_DETERMINE_TEXT = "Осталось обнаружить: ";
         private Sapper _game1;
         private Graphics _gameFieldGraph;
+        private Form1 _mainForm;
 
         #endregion
 
@@ -26,6 +27,12 @@ namespace SapperApplication.Forms
         public Form3()
         {
             InitializeComponent();
+        }
+
+        public Form3(Form1 mainForm)
+        {
+            InitializeComponent();
+            _mainForm = mainForm;
         }
 
         #endregion
@@ -48,6 +55,7 @@ namespace SapperApplication.Forms
             //Задание размеров элементов и инициализация объекта GameFieldGraph;
             pictureBoxGameField.Height = Sapper.FIELD_SQ_Y * Sapper.SQUARE_F + 10;
             Height = pictureBoxGameField.Height + 80;
+            // = Height;
             pictureBoxGameField.Width = Sapper.FIELD_SQ_X * Sapper.SQUARE_F + 10;
             Width = pictureBoxGameField.Width + 40;
             pictureBoxGameField.Top = FIELD_TOP;
@@ -83,12 +91,22 @@ namespace SapperApplication.Forms
             }
         }
 
+        private void pictureBoxGameField_DoubleClick(object sender, EventArgs e)
+        {
+            var cursorCoordination = new Point(Cursor.Position.X - pictureBoxGameField.Location.X - Left - 8,
+                Cursor.Position.Y - pictureBoxGameField.Location.Y - Top - 30);
+            _game1.OpenAllNeighbours(cursorCoordination);
+        }
+
         private void button1_Click(object sender,
                                    EventArgs e)
         {
             if (_game1 == null)
             {
                 _game1 = new Sapper(_gameFieldGraph);
+                _mainForm.SubscribeByCurrentSapperGameEvent(_game1);
+                _game1.EndingGame_Lose += CloseThisForm;
+                _game1.EndingGame_Win += CloseThisForm;
             }
 
             _game1.RandomizeBomb();
@@ -96,6 +114,10 @@ namespace SapperApplication.Forms
             _game1.DrawAllCells();
         }
 
+        private void CloseThisForm(int i)
+        {
+            Close();
+        }
         #endregion
     }
 }
