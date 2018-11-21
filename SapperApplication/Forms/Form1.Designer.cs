@@ -66,7 +66,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(116, 34);
             this.button2.TabIndex = 2;
-            this.button2.Text = "Generate savanna";
+            this.button2.Text = "Add 2 plants";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 

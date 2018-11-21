@@ -100,22 +100,9 @@ namespace SapperApplication.Forms
         private void button2_Click(object sender,
                                    EventArgs e)
         {
-            //_gameFieldGraph.FillEllipse(Brushes.DarkOliveGreen, 150, 150, 50, 50);
             CurrentZooLogic.Make10Plants();
             CurrentZooGUI.DrawAllPlants();
 
-            /* Осталось со времен Briazoa
-            if (_bryozoaList == null)
-            {
-                return;
-            }
-
-            foreach (var i in _bryozoaList)
-            {
-                i.DrawMyself(_gameFieldGraph);
-                i.Activate(_gameFieldGraph);
-            }
-            */
         }
 
         private void button3_Click(object sender,

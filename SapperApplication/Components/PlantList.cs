@@ -34,6 +34,7 @@ namespace SapperApplication.Components
                         }
                         AddedPlantListItem.Next = CurrentPlantListItem;
                         AddedPlantListItem.Prev = CurrentPlantListItem.Prev;
+                        CurrentPlantListItem.Prev = AddedPlantListItem;
                         if (AddedPlantListItem.Prev != null)
                         {
                             AddedPlantListItem.Prev.Next = AddedPlantListItem;
