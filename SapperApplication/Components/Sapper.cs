@@ -109,7 +109,7 @@ namespace SapperApplication.Components
                     ExpandZeroes();
                     DrawAllCells();
                 }
-                else if (_field[x, y].Value == 13)
+                else if (_field[x, y].Value == 13 && !_field[x, y].IsSelected)
                 {
                     DrawOneCell(x, y);
                     EndingGame_Lose(Difficult);
@@ -340,9 +340,7 @@ namespace SapperApplication.Components
             }
             else
             {
-                switch (_field[x,
-                               y]
-                   .Value)
+                switch (_field[x,y].Value)
                 {
                     case 13:
                         _gameFieldGraph.FillRectangle(Brushes.DarkRed,

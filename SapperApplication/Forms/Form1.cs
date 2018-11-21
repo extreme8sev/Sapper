@@ -21,7 +21,8 @@ namespace SapperApplication.Forms
         #endregion
 
         #region Public Members
-        public ZooLogic CurrentZooGame;
+        public ZooLogic CurrentZooLogic;
+        public ZooGIU CurrentZooGUI;
         public SapperGameUIManager CurrentSapperGameUIManager;
         #endregion
         #region  .ctor
@@ -44,8 +45,9 @@ namespace SapperApplication.Forms
             cursorSelector.Top = 50;
             cursorType.SelectedItem = cursorType.Items[0];
             _gameFieldGraph = Graphics.FromHwnd(GameField.Handle);
-            CurrentZooGame = new ZooLogic();
-            CurrentSapperGameUIManager = new SapperGameUIManager(this, CurrentZooGame);
+            CurrentZooLogic = new ZooLogic(GameField.Width, GameField.Height);
+            CurrentZooGUI = new ZooGIU(_gameFieldGraph, CurrentZooLogic, GameField.Width, GameField.Height);
+            CurrentSapperGameUIManager = new SapperGameUIManager(this, CurrentZooLogic);
             CurrentSapperGameUIManager.WriteNumberOfSapperPoint();
         }
 
@@ -98,6 +100,11 @@ namespace SapperApplication.Forms
         private void button2_Click(object sender,
                                    EventArgs e)
         {
+            //_gameFieldGraph.FillEllipse(Brushes.DarkOliveGreen, 150, 150, 50, 50);
+            CurrentZooLogic.Make10Plants();
+            CurrentZooGUI.DrawAllPlants();
+
+            /* Осталось со времен Briazoa
             if (_bryozoaList == null)
             {
                 return;
@@ -108,6 +115,7 @@ namespace SapperApplication.Forms
                 i.DrawMyself(_gameFieldGraph);
                 i.Activate(_gameFieldGraph);
             }
+            */
         }
 
         private void button3_Click(object sender,
