@@ -5,6 +5,8 @@ using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 using SapperApplication.Components;
+using SapperApplication.Components.DrawableObjects.Bryozoa;
+using SapperApplication.Components.ObjectDrawers;
 
 #endregion
 
@@ -123,7 +125,13 @@ namespace SapperApplication.Forms
                     _bryozoaList = tempArray;
                 }
 
-                _bryozoaList[_bryozoaList.Length - 1].DrawMyself(_gameFieldGraph);
+                var bryozoa = _bryozoaList[_bryozoaList.Length - 1];
+
+                DrawerFactory.Instance[bryozoa]
+                             .Draw(_gameFieldGraph,
+                                   bryozoa,
+                                   0);
+
                 addPlantsButton.Text = _bryozoaList.Length.ToString();
             }
         }
@@ -144,7 +152,7 @@ namespace SapperApplication.Forms
         private void addPlantsButton_Click(object sender,
                                            EventArgs e)
         {
-            CurrentZooLogic.MakePlantAndBush(10);
+            CurrentZooLogic.MakePlantAndBush(20);
             CurrentZooGUI.DrawAllPlants();
         }
 

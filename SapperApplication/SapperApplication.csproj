@@ -40,9 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\DrawableObjects\Bryozoa\BryozoaActivator.cs" />
     <Compile Include="Components\DrawableObjects\DrawableObject.cs" />
-    <Compile Include="Components\Bryozoa.cs" />
+    <Compile Include="Components\DrawableObjects\Bryozoa\Bryozoa.cs" />
     <Compile Include="Components\Cell.cs" />
+    <Compile Include="Components\ObjectDrawers\BryozoaActivatorDrawer.cs" />
+    <Compile Include="Components\ObjectDrawers\BryozoaDrawer.cs" />
     <Compile Include="Components\ObjectDrawers\DrawerFactory.cs" />
     <Compile Include="Components\DrawableObjects\Plants\PlantBase.cs" />
     <Compile Include="Components\DrawableObjects\Plants\PlantBush.cs" />

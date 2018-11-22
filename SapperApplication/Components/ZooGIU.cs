@@ -1,7 +1,9 @@
 ﻿#region Usings
 
 using System.Drawing;
+using System.Linq;
 using SapperApplication.Components.DrawableObjects;
+using SapperApplication.Components.DrawableObjects.Plants;
 using SapperApplication.Components.ObjectDrawers;
 
 #endregion
@@ -41,7 +43,12 @@ namespace SapperApplication.Components
         {
             ClearScreen();
 
-            foreach (var plant in _currentZooLogic.Plants)
+            foreach (var plant in _currentZooLogic.Plants.Where(x=>x.GetType() == typeof(PlantBush)))
+            {
+                Draw(plant);
+            }
+
+            foreach (var plant in _currentZooLogic.Plants.Where(x=>x.GetType() == typeof(PlantTree)))
             {
                 Draw(plant);
             }
