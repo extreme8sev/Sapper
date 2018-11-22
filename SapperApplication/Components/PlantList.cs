@@ -1,70 +1,62 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SapperApplication.Components
+﻿namespace SapperApplication.Components
 {
     public class PlantList
     {
+        #region Public Members
+
         public PlantListItem FirstPlant;
-        public PlantList()
-        {
-        }
+
+        #endregion
+
+        #region  Public Methods
 
         public void AddNewPlant(PlantBase plant)
         {
             if (FirstPlant == null)
             {
-                FirstPlant = new PlantListItem(plant, null, null);
+                FirstPlant = new PlantListItem(plant,
+                                               null,
+                                               null);
             }
 
             else
             {
-                var AddedPlantListItem = new PlantListItem(plant, null, null);
-                var CurrentPlantListItem = FirstPlant;
+                var addedPlantListItem = new PlantListItem(plant,
+                                                           null,
+                                                           null);
+                PlantListItem currentPlantListItem = FirstPlant;
                 for (;;)
                 {
-                    if (CurrentPlantListItem.Plant.MyCoordinate.Y > plant.MyCoordinate.Y)
+                    if (currentPlantListItem.Plant.MyCoordinate.Y > plant.MyCoordinate.Y)
                     {
-                        if (CurrentPlantListItem == FirstPlant)
+                        if (currentPlantListItem == FirstPlant)
                         {
-                            FirstPlant = AddedPlantListItem;
+                            FirstPlant = addedPlantListItem;
                         }
-                        AddedPlantListItem.Next = CurrentPlantListItem;
-                        AddedPlantListItem.Prev = CurrentPlantListItem.Prev;
-                        CurrentPlantListItem.Prev = AddedPlantListItem;
-                        if (AddedPlantListItem.Prev != null)
+
+                        addedPlantListItem.Next = currentPlantListItem;
+                        addedPlantListItem.Prev = currentPlantListItem.Prev;
+                        currentPlantListItem.Prev = addedPlantListItem;
+                        if (addedPlantListItem.Prev != null)
                         {
-                            AddedPlantListItem.Prev.Next = AddedPlantListItem;
+                            addedPlantListItem.Prev.Next = addedPlantListItem;
                         }
+
                         break;
                     }
-                    if (CurrentPlantListItem.Next == null)
+
+                    if (currentPlantListItem.Next == null)
                     {
-                        AddedPlantListItem.Prev = CurrentPlantListItem;
-                        CurrentPlantListItem.Next = AddedPlantListItem;
+                        addedPlantListItem.Prev = currentPlantListItem;
+                        currentPlantListItem.Next = addedPlantListItem;
                         break;
                     }
-                    CurrentPlantListItem = CurrentPlantListItem.Next;
+
+                    currentPlantListItem = currentPlantListItem.Next;
                 }
             }
         }
 
-
-        public class PlantListItem
-        {
-            public PlantBase Plant;
-            public PlantListItem Next;
-            public PlantListItem Prev;
-            public PlantListItem(PlantBase plant, PlantListItem next, PlantListItem prev)
-            {
-                Plant = plant;
-                Next = next;
-                Prev = prev;
-            }
-
-        }
+        #endregion
     }
 }

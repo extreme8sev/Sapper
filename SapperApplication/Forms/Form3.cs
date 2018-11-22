@@ -16,9 +16,9 @@ namespace SapperApplication.Forms
         private const int FIELD_LEFT = 15; //верхний правый угол поля
         private const int FIELD_TOP = 35;
         private const string LEFT_TO_DETERMINE_TEXT = "Осталось обнаружить: ";
+        private readonly Form1 _mainForm;
         private Sapper _game1;
         private Graphics _gameFieldGraph;
-        private Form1 _mainForm;
 
         #endregion
 
@@ -91,10 +91,11 @@ namespace SapperApplication.Forms
             }
         }
 
-        private void pictureBoxGameField_DoubleClick(object sender, EventArgs e)
+        private void pictureBoxGameField_DoubleClick(object sender,
+                                                     EventArgs e)
         {
             var cursorCoordination = new Point(Cursor.Position.X - pictureBoxGameField.Location.X - Left - 8,
-                Cursor.Position.Y - pictureBoxGameField.Location.Y - Top - 30);
+                                               Cursor.Position.Y - pictureBoxGameField.Location.Y - Top - 30);
             _game1.OpenAllNeighbours(cursorCoordination);
         }
 
@@ -105,8 +106,8 @@ namespace SapperApplication.Forms
             {
                 _game1 = new Sapper(_gameFieldGraph);
                 _mainForm.SubscribeByCurrentSapperGameEvent(_game1);
-                _game1.EndingGame_Lose += CloseThisForm;
-                _game1.EndingGame_Win += CloseThisForm;
+                _game1.EndingGameLose += CloseThisForm;
+                _game1.EndingGameWin += CloseThisForm;
             }
 
             _game1.RandomizeBomb();
@@ -118,6 +119,7 @@ namespace SapperApplication.Forms
         {
             Close();
         }
+
         #endregion
     }
 }

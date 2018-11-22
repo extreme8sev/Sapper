@@ -11,6 +11,8 @@ namespace SapperApplication.Components
     {
         #region Public Members
 
+        public delegate void EndingGame(int difficult);
+
         public int NumberOfBombLeft;
         public const int FIELD_SQ_X = 18; // Размер поля в ячейках
         public const int FIELD_SQ_Y = 12;
@@ -20,11 +22,13 @@ namespace SapperApplication.Components
 
         #region Private Members
 
-        private readonly int _numberOfBomb;
+        private readonly int _difficulty;
 
         private readonly Cell[,] _field = new Cell[FIELD_SQ_X, FIELD_SQ_Y];
 
         private readonly Graphics _gameFieldGraph;
+
+        private readonly int _numberOfBomb;
 
         private readonly Pen _userBlack = new Pen(Color.Black,
                                                   2);
@@ -38,17 +42,18 @@ namespace SapperApplication.Components
 
         private bool _isFirstClick;
 
-        private int Difficult;
-
         #endregion
 
         #region  .ctor
 
-        public Sapper(Graphics grf):this(grf, 1)
+        public Sapper(Graphics grf)
+            : this(grf,
+                   1)
         {
         }
 
-        public Sapper(Graphics grf, int difficult)
+        public Sapper(Graphics grf,
+                      int difficulty)
         {
             _gameFieldGraph = grf;
             for (var i = 0; i < FIELD_SQ_X; i++)
@@ -59,9 +64,17 @@ namespace SapperApplication.Components
                            j] = new Cell();
                 }
             }
-            Difficult = difficult;
-            _numberOfBomb = 30 + difficult * 10;
+
+            _difficulty = difficulty;
+            _numberOfBomb = 30 + difficulty * 10;
         }
+
+        #endregion
+
+        #region  Properties
+
+        public int Zalupa { get; set; }
+
         #endregion
 
         #region  Public Methods
@@ -87,9 +100,8 @@ namespace SapperApplication.Components
             }
         }
 
-        public delegate void EndingGame (int difficult);
-        public event EndingGame EndingGame_Lose;
-        public event EndingGame EndingGame_Win;
+        public event EndingGame EndingGameLose;
+        public event EndingGame EndingGameWin;
 
         public void ClickThisPoint(Point point)
         {
@@ -97,27 +109,47 @@ namespace SapperApplication.Components
             int y = (point.Y - 5) / SQUARE_F;
             if (x >= 0 && y >= 0 && x < FIELD_SQ_X && y < FIELD_SQ_Y)
             {
-                _field[x,y].Open();
-                if (_isFirstClick && _field[x, y].Value != 0)
+                _field[x,
+                       y]
+                   .Open();
+                if (_isFirstClick
+                 && _field[x,
+                           y]
+                       .Value
+                 != 0)
                 {
                     RandomizeBomb();
                     ClickThisPoint(point);
                 }
-                DrawOneCell(x, y);
-                if (_field[x, y].Value == 0)
+
+                DrawOneCell(x,
+                            y);
+                if (_field[x,
+                           y]
+                       .Value
+                 == 0)
                 {
                     ExpandZeroes();
                     DrawAllCells();
                 }
-                else if (_field[x, y].Value == 13 && !_field[x, y].IsSelected)
+                else if (_field[x,
+                                y]
+                            .Value
+                      == 13
+                      && !_field[x,
+                                 y]
+                            .IsSelected)
                 {
-                    DrawOneCell(x, y);
-                    EndingGame_Lose(Difficult);
+                    DrawOneCell(x,
+                                y);
+                    EndingGameLose?.Invoke(_difficulty);
                 }
+
                 if (IsItTheEndOfTheGame())
                 {
-                    EndingGame_Win(Difficult);
+                    EndingGameWin?.Invoke(_difficulty);
                 }
+
                 _isFirstClick = false;
             }
         }
@@ -126,19 +158,31 @@ namespace SapperApplication.Components
         {
             var x = (thisPoint.X - 5) / SQUARE_F;
             var y = (thisPoint.Y - 5) / SQUARE_F;
-            if (x >= 0 && y >= 0 && x < FIELD_SQ_X && y < FIELD_SQ_Y && _field[x, y].IsOpened)
+            if (x >= 0
+             && y >= 0
+             && x < FIELD_SQ_X
+             && y < FIELD_SQ_Y
+             && _field[x,
+                       y]
+                   .IsOpened)
             {
-                var NumberOfSelectedCells = 0;
-                Cell[] NeighboursArrey = GetNeighbors(x, y);
-                foreach (Cell cell in NeighboursArrey)
+                var numberOfSelectedCells = 0;
+                Cell[] neigboursArray = GetNeighbors(x,
+                                                     y);
+                foreach (Cell cell in neigboursArray)
                 {
                     if (cell != null && cell.IsSelected)
                     {
-                        NumberOfSelectedCells++;
+                        numberOfSelectedCells++;
                     }
                 }
-                if (NumberOfSelectedCells == _field[x, y].Value)
-                    foreach (Cell cell in NeighboursArrey)
+
+                if (numberOfSelectedCells
+                 == _field[x,
+                           y]
+                       .Value)
+                {
+                    foreach (Cell cell in neigboursArray)
                     {
                         if (cell != null && !cell.IsSelected && !cell.IsOpened)
                         {
@@ -149,9 +193,12 @@ namespace SapperApplication.Components
                             }
                         }
                     }
+                }
+
                 DrawAllCells();
-                return NumberOfSelectedCells;
+                return numberOfSelectedCells;
             }
+
             return 0;
         }
 
@@ -164,12 +211,19 @@ namespace SapperApplication.Components
              && y >= 0
              && x < FIELD_SQ_X
              && y < FIELD_SQ_Y
-             && !_field[x,y].IsOpened) 
+             && !_field[x,
+                        y]
+                   .IsOpened)
             {
-                _field[x, y].Select();
-                DrawOneCell(x, y);
+                _field[x,
+                       y]
+                   .Select();
+                DrawOneCell(x,
+                            y);
 
-                if (!_field[x,y].IsSelected)
+                if (!_field[x,
+                            y]
+                       .IsSelected)
                 {
                     NumberOfBombLeft++;
                 }
@@ -179,7 +233,7 @@ namespace SapperApplication.Components
                     NumberOfBombLeft--;
                     if (NumberOfBombLeft == 0 && IsItTheEndOfTheGame())
                     {
-                        EndingGame_Win(Difficult);
+                        EndingGameWin?.Invoke(_difficulty);
                     }
                 }
             }
@@ -188,7 +242,7 @@ namespace SapperApplication.Components
         }
 
         /// <summary>
-        /// Метод расстановки бомб
+        ///     Метод расстановки бомб
         /// </summary>
         public void RandomizeBomb()
         {
@@ -340,7 +394,9 @@ namespace SapperApplication.Components
             }
             else
             {
-                switch (_field[x,y].Value)
+                switch (_field[x,
+                               y]
+                   .Value)
                 {
                     case 13:
                         _gameFieldGraph.FillRectangle(Brushes.DarkRed,
@@ -421,7 +477,7 @@ namespace SapperApplication.Components
         }
 
         /// <summary>
-        /// Метод для снятия бомб и цифр с поля
+        ///     Метод для снятия бомб и цифр с поля
         /// </summary>
         private void ClearGameField()
         {
@@ -446,20 +502,27 @@ namespace SapperApplication.Components
             {
                 for (var j = 0; j < FIELD_SQ_Y; j++)
                 {
-                    if (!_field[i, j].IsOpened)
+                    if (!_field[i,
+                                j]
+                           .IsOpened)
                     {
                         numberOfClosedCells++;
                     }
-                    if(_field[i, j].IsSelected)
+
+                    if (_field[i,
+                               j]
+                       .IsSelected)
                     {
                         numberOfSelectedCells++;
                     }
                 }
             }
+
             if (numberOfClosedCells == _numberOfBomb && _numberOfBomb == numberOfSelectedCells)
             {
                 return true;
             }
+
             return false;
         }
 

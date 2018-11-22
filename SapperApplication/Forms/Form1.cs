@@ -13,23 +13,40 @@ namespace SapperApplication.Forms
     {
         #region Private Members
 
-        private Bryozoa[] _bryozoaList;
+        //private Bryozoa[] _bryozoaList;
         private Graphics _gameFieldGraph;
         private int _startX = -10;
         private int _startY = -10;
 
         #endregion
 
-        #region Public Members
-        public ZooLogic CurrentZooLogic;
-        public ZooGIU CurrentZooGUI;
-        public SapperGameUIManager CurrentSapperGameUIManager;
-        #endregion
         #region  .ctor
 
         public Form1()
         {
             InitializeComponent();
+        }
+
+        #endregion
+
+        #region  Properties
+
+        public ZooLogic CurrentZooLogic { get; set; }
+        public ZooGIU CurrentZooGUI { get; set; }
+        public SapperGameUIManager CurrentSapperGameUIManager { get; set; }
+
+        #endregion
+
+        #region  Public Methods
+
+        public void SetSapperScoreLabelText(string setString)
+        {
+            SapperScoreLabel.Text = setString;
+        }
+
+        public void SubscribeByCurrentSapperGameEvent(Sapper currentSapperGame)
+        {
+            CurrentSapperGameUIManager.SubscribeByCurrentSapperGameEvent(currentSapperGame);
         }
 
         #endregion
@@ -45,9 +62,14 @@ namespace SapperApplication.Forms
             cursorSelector.Top = 50;
             cursorType.SelectedItem = cursorType.Items[0];
             _gameFieldGraph = Graphics.FromHwnd(GameField.Handle);
-            CurrentZooLogic = new ZooLogic(GameField.Width, GameField.Height);
-            CurrentZooGUI = new ZooGIU(_gameFieldGraph, CurrentZooLogic, GameField.Width, GameField.Height);
-            CurrentSapperGameUIManager = new SapperGameUIManager(this, CurrentZooLogic);
+            CurrentZooLogic = new ZooLogic(GameField.Width,
+                                           GameField.Height);
+            CurrentZooGUI = new ZooGIU(_gameFieldGraph,
+                                       CurrentZooLogic,
+                                       GameField.Width,
+                                       GameField.Height);
+            CurrentSapperGameUIManager = new SapperGameUIManager(this,
+                                                                 CurrentZooLogic);
             CurrentSapperGameUIManager.WriteNumberOfSapperPoint();
         }
 
@@ -65,44 +87,43 @@ namespace SapperApplication.Forms
             _startY += 50;
         }
 
-        private void GameField_Click(object sender,
-                                     EventArgs e)
-        {
-            var cursorCoordination = new Point(Cursor.Position.X - GameField.Location.X - Left - 8,
-                                               Cursor.Position.Y - GameField.Location.Y - Top - 30);
-            button1.Text = Left.ToString();
+        //private void GameField_Click(object sender,
+        //                             EventArgs e)
+        //{
+        //    var cursorCoordination = new Point(Cursor.Position.X - GameField.Location.X - Left - 8,
+        //                                       Cursor.Position.Y - GameField.Location.Y - Top - 30);
+        //    button1.Text = Left.ToString();
 
-            if (cursorType.SelectedItem == cursorType.Items[1])
-            {
-                if (_bryozoaList == null) //Create first object of this class
-                {
-                    button2.Text = "null";
-                    _bryozoaList = new Bryozoa[1];
-                    _bryozoaList[0] = new Bryozoa(cursorCoordination);
-                }
-                else //Create another (not first) object
-                {
-                    var tempArray = new Bryozoa[_bryozoaList.Length + 1];
-                    for (var i = 0; i < _bryozoaList.Length; i++)
-                    {
-                        tempArray[i] = _bryozoaList[i];
-                    }
+        //    if (cursorType.SelectedItem == cursorType.Items[1])
+        //    {
+        //        if (_bryozoaList == null) //Create first object of this class
+        //        {
+        //            button2.Text = NULL_TEXT;
+        //            _bryozoaList = new Bryozoa[1];
+        //            _bryozoaList[0] = new Bryozoa(cursorCoordination);
+        //        }
+        //        else //Create another (not first) object
+        //        {
+        //            var tempArray = new Bryozoa[_bryozoaList.Length + 1];
+        //            for (var i = 0; i < _bryozoaList.Length; i++)
+        //            {
+        //                tempArray[i] = _bryozoaList[i];
+        //            }
 
-                    tempArray[tempArray.Length - 1] = new Bryozoa(cursorCoordination);
-                    _bryozoaList = tempArray;
-                }
+        //            tempArray[tempArray.Length - 1] = new Bryozoa(cursorCoordination);
+        //            _bryozoaList = tempArray;
+        //        }
 
-                _bryozoaList[_bryozoaList.Length - 1].DrawMyself(_gameFieldGraph);
-                button2.Text = _bryozoaList.Length.ToString();
-            }
-        }
+        //        _bryozoaList[_bryozoaList.Length - 1].DrawMyself(_gameFieldGraph);
+        //        button2.Text = _bryozoaList.Length.ToString();
+        //    }
+        //}
 
         private void button2_Click(object sender,
                                    EventArgs e)
         {
             CurrentZooLogic.Make10Plants();
             CurrentZooGUI.DrawAllPlants();
-
         }
 
         private void button3_Click(object sender,
@@ -113,24 +134,13 @@ namespace SapperApplication.Forms
             CurrentSapperGameUIManager.WriteNumberOfSapperPoint();
         }
 
-        private void GameField_DoubleClick(object sender, EventArgs e)
+        private void GameField_DoubleClick(object sender,
+                                           EventArgs e)
         {
-
         }
 
         #endregion
 
-        #region Public Methods
-        public void SetSapperScoreLabelText(String setString)
-        {
-            SapperScoreLabel.Text = setString;
-        }
-
-        public void SubscribeByCurrentSapperGameEvent(Sapper currentSapperGame)
-        {
-            CurrentSapperGameUIManager.SubscribeByCurrentSapperGameEvent(currentSapperGame);
-        }
-
-        #endregion
+        //private const string NULL_TEXT = "null";
     }
 }

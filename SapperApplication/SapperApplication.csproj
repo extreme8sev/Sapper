@@ -34,10 +34,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -49,6 +45,7 @@
     <Compile Include="Components\PlantBase.cs" />
     <Compile Include="Components\PlantBush.cs" />
     <Compile Include="Components\PlantList.cs" />
+    <Compile Include="Components\PlantListItem.cs" />
     <Compile Include="Components\PlantTree.cs" />
     <Compile Include="Components\SapperGameUIManager.cs" />
     <Compile Include="Components\ZooGIU.cs" />

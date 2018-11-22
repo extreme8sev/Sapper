@@ -1,46 +1,66 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region Usings
+
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
+
+#endregion
 
 namespace SapperApplication.Components
 {
     public abstract class PlantBase
     {
+        #region Public Members
+
+        public TimerCallback GrownTimerCallback;
+        public Point MyCoordinate;
         public static int MaxHealth;
         public static int HealthToGrow;
-        public int GrownTime { get; set; }
-        public TimerCallback GrownTimerCallback;
-        public int Health { get; set; }
-        public bool IsFistGeneration { get; set; }
-        public int Sun { get; set; }
-        public Point MyCoordinate;
 
-        public PlantBase(bool isFirstGeneration, Point coord)
+        #endregion
+
+        #region  .ctor
+
+        protected PlantBase(bool isFirstGeneration,
+                            Point coord)
         {
             IsFistGeneration = isFirstGeneration;
             MyCoordinate = coord;
         }
 
+        #endregion
+
+        #region  Properties
+
+        public int GrownTime { get; set; }
+        public int Health { get; set; }
+        public bool IsFistGeneration { get; set; }
+        public int Sun { get; set; }
+
+        #endregion
+
+        #region  Public Methods
+
         public void Initial()
         {
-            GrownTimerCallback = new TimerCallback(GrowUp);
-            Timer GrownUpTimer = new Timer(GrownTimerCallback, null, GrownTime, GrownTime);
-            Health = MaxHealth/4;
+            GrownTimerCallback = GrowUp;
+            var grownUpTimer = new Timer(GrownTimerCallback,
+                                         null,
+                                         GrownTime,
+                                         GrownTime);
+            Health = MaxHealth / 4;
         }
+
         public int BeEaten(int howMutch)
         {
             if (howMutch < Health)
             {
                 return howMutch;
             }
-            else return Health;
+
+            return Health;
         }
 
-        public void GrowUp(object Obj)
+        public void GrowUp(object obj)
         {
             Health += Sun;
             if (Health >= HealthToGrow)
@@ -54,6 +74,6 @@ namespace SapperApplication.Components
         {
         }
 
+        #endregion
     }
-
 }

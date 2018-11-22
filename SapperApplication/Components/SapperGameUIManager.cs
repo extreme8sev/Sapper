@@ -1,45 +1,56 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#region Usings
+
 using System.Windows.Forms;
+using SapperApplication.Forms;
+
+#endregion
 
 namespace SapperApplication.Components
 {
     public class SapperGameUIManager
     {
-        private Forms.Form1 _mainForm;
-        private ZooLogic _zooLogic;
+        #region Private Members
 
-        public SapperGameUIManager(Forms.Form1 form, ZooLogic zooLogic)
+        private readonly Form1 _mainForm;
+        private readonly ZooLogic _zooLogic;
+
+        #endregion
+
+        #region  .ctor
+
+        public SapperGameUIManager(Form1 form,
+                                   ZooLogic zooLogic)
         {
             _mainForm = form;
             _zooLogic = zooLogic;
         }
 
+        #endregion
+
+        #region  Public Methods
+
         public void WriteNumberOfSapperPoint()
         {
-            string text = "Очков на счету: " + _zooLogic.SapperPoint.ToString();
+            string text = "Очков на счету: " + _zooLogic.SapperPoint;
             _mainForm.SetSapperScoreLabelText(text);
         }
 
         public void SubscribeByCurrentSapperGameEvent(Sapper currentSapperGame)
         {
-            currentSapperGame.EndingGame_Lose += SapperGameIsLoosed;
-            currentSapperGame.EndingGame_Win += SapperGameIsWinned;
+            currentSapperGame.EndingGameLose += SapperGameIsLoosed;
+            currentSapperGame.EndingGameWin += SapperGameIsWinned;
         }
 
         public void SapperGameIsWinned(int difficult)
         {
             _zooLogic.SapperPoint += difficult * 200;
             MessageBox.Show(
-                "You win!",
-                "Message",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information,
-                MessageBoxDefaultButton.Button1,
-                MessageBoxOptions.DefaultDesktopOnly);
+                            "You win!",
+                            "Message",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information,
+                            MessageBoxDefaultButton.Button1,
+                            MessageBoxOptions.DefaultDesktopOnly);
             WriteNumberOfSapperPoint();
         }
 
@@ -47,13 +58,15 @@ namespace SapperApplication.Components
         {
             _zooLogic.SapperPoint -= difficult * 100;
             MessageBox.Show(
-                "You lose =(",
-                "Message",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning,
-                MessageBoxDefaultButton.Button1,
-                MessageBoxOptions.DefaultDesktopOnly);
+                            "You lose =(",
+                            "Message",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning,
+                            MessageBoxDefaultButton.Button1,
+                            MessageBoxOptions.DefaultDesktopOnly);
             WriteNumberOfSapperPoint();
         }
+
+        #endregion
     }
 }

@@ -1,23 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region Usings
+
+using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+#endregion
 
 namespace SapperApplication.Components
 {
     public class ZooLogic
     {
+        #region Public Members
 
-        public int SapperPoint { get; set; }
         public PlantList CurrentPlantList;
 
-        private int GameFieldHeight { get; set; }
-        private int GameFieldWidth { get; set; }
+        #endregion
 
+        #region  .ctor
 
-        public ZooLogic(int gameFieldWidth, int gameFieldHeight)
+        public ZooLogic(int gameFieldWidth,
+                        int gameFieldHeight)
         {
             SapperPoint = 1000;
             GameFieldHeight = gameFieldHeight;
@@ -25,21 +26,44 @@ namespace SapperApplication.Components
             CurrentPlantList = new PlantList();
         }
 
+        #endregion
+
+        #region  Properties
+
+        public int SapperPoint { get; set; }
+
+        #endregion
+
+        #region  Private Properties
+
+        private int GameFieldHeight { get; }
+        private int GameFieldWidth { get; }
+
+        #endregion
+
+        #region  Public Methods
+
         public void Make10Plants() //Временно
         {
-            Point PlantPoint = new Point();
-            Random rnd = new Random();
-            PlantBase plant;
+            var plantPoint = new Point();
+            var rnd = new Random();
 
-                PlantPoint.X = rnd.Next(20, GameFieldWidth-20);
-                PlantPoint.Y = rnd.Next(20, GameFieldHeight-2);
-                plant = new PlantBush(true, PlantPoint);
-                CurrentPlantList.AddNewPlant(plant);
-                PlantPoint.X = rnd.Next(20, GameFieldWidth - 20);
-                PlantPoint.Y = rnd.Next(20, GameFieldHeight - 2);
-                plant = new PlantTree(true, PlantPoint);
-                CurrentPlantList.AddNewPlant(plant);
+            plantPoint.X = rnd.Next(20,
+                                    GameFieldWidth - 20);
+            plantPoint.Y = rnd.Next(20,
+                                    GameFieldHeight - 2);
+            PlantBase plant = new PlantBush(true,
+                                            plantPoint);
+            CurrentPlantList.AddNewPlant(plant);
+            plantPoint.X = rnd.Next(20,
+                                    GameFieldWidth - 20);
+            plantPoint.Y = rnd.Next(20,
+                                    GameFieldHeight - 2);
+            plant = new PlantTree(true,
+                                  plantPoint);
+            CurrentPlantList.AddNewPlant(plant);
         }
-        
+
+        #endregion
     }
 }

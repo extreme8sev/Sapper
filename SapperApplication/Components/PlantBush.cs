@@ -1,16 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region Usings
+
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+
+#endregion
 
 namespace SapperApplication.Components
 {
-    class PlantBush : PlantBase
+    internal class PlantBush : PlantBase
     {
-        public PlantBush(bool isFirstGeneration, Point coord) : base(isFirstGeneration, coord)
+        #region  .ctor
+
+        public PlantBush(bool isFirstGeneration,
+                         Point coord)
+            : base(isFirstGeneration,
+                   coord)
         {
             MaxHealth = 1000;
             HealthToGrow = MaxHealth * 2;
@@ -19,6 +22,6 @@ namespace SapperApplication.Components
             Initial();
         }
 
-
+        #endregion
     }
 }

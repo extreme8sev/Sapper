@@ -1,21 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region Usings
+
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+#endregion
 
 namespace SapperApplication.Components
 {
     public class ZooGIU
     {
-        private Graphics _grField;
-        private ZooLogic _currentZooLogic;
-        private int _gameFieldHeight { get; set; }
-        private int _gameFieldWidth { get; set; }
-        private int _zoom = 3;
+        #region Private Members
 
-        public ZooGIU(Graphics grField, ZooLogic currentZooLogic, int gameFieldWidth, int gameFieldHeight)
+        private const int ZOOM = 3;
+        private readonly ZooLogic _currentZooLogic;
+        private readonly int _gameFieldHeight;
+        private readonly int _gameFieldWidth;
+        private readonly Graphics _grField;
+
+        #endregion
+
+        #region  .ctor
+
+        public ZooGIU(Graphics grField,
+                      ZooLogic currentZooLogic,
+                      int gameFieldWidth,
+                      int gameFieldHeight)
         {
             _grField = grField;
             _currentZooLogic = currentZooLogic;
@@ -23,10 +31,9 @@ namespace SapperApplication.Components
             _gameFieldWidth = gameFieldWidth;
         }
 
-        private void ClearScreen()
-        {
-            _grField.FillRectangle(Brushes.Goldenrod, 0, 0, _gameFieldWidth, _gameFieldHeight);
-        }
+        #endregion
+
+        #region  Public Methods
 
         public void DrawAllPlants()
         {
@@ -39,17 +46,30 @@ namespace SapperApplication.Components
                 DrawPlant(_currentZooLogic.PlantArray[i]);
             }
             */
-            var CurrentPlantItem = _currentZooLogic.CurrentPlantList.FirstPlant;
-            for (;;)
+            PlantListItem currentPlantItem = _currentZooLogic.CurrentPlantList.FirstPlant;
+            while (true)
             {
-                if (CurrentPlantItem == null)
+                if (currentPlantItem == null)
                 {
                     break;
                 }
-                DrawPlant(CurrentPlantItem.Plant);
-                CurrentPlantItem = CurrentPlantItem.Next;
-            }
 
+                DrawPlant(currentPlantItem.Plant);
+                currentPlantItem = currentPlantItem.Next;
+            }
+        }
+
+        #endregion
+
+        #region  Private Methods
+
+        private void ClearScreen()
+        {
+            _grField.FillRectangle(Brushes.Goldenrod,
+                                   0,
+                                   0,
+                                   _gameFieldWidth,
+                                   _gameFieldHeight);
         }
 
 
@@ -68,142 +88,141 @@ namespace SapperApplication.Components
 
         private void DrawPlantBush(PlantBush plant)
         {
-            var zoom = _zoom * plant.Health / PlantBush.MaxHealth;
-            var _leafBrush = Brushes.DarkOliveGreen;
-            var _LeafConturPen = new Pen(Color.Black, 2);
-            int _radiusSmall = 5 * _zoom;
-            int _radiusBig = 7 * _zoom;
-            int _lengh = 10 * _zoom;
+            Brush leafBrush = Brushes.DarkOliveGreen;
+            var leafConturPen = new Pen(Color.Black,
+                                        2);
+            const int radiusSmall = 5 * ZOOM;
+            const int radiusBig = 7 * ZOOM;
 
             //Левая часть
-            _grField.FillEllipse(_leafBrush,
-                                plant.MyCoordinate.X - (int)(_radiusSmall*2.5),
-                                plant.MyCoordinate.Y - _radiusSmall * 2,
-                                2 * _radiusSmall,
-                                2 * _radiusSmall);
-            _grField.DrawEllipse(_LeafConturPen,
-                                plant.MyCoordinate.X - (int)(_radiusSmall * 2.5),
-                                plant.MyCoordinate.Y - _radiusSmall * 2,
-                                2 * _radiusSmall,
-                                2 * _radiusSmall);
+            _grField.FillEllipse(leafBrush,
+                                 plant.MyCoordinate.X - (int) (radiusSmall * 2.5),
+                                 plant.MyCoordinate.Y - radiusSmall * 2,
+                                 2 * radiusSmall,
+                                 2 * radiusSmall);
+            _grField.DrawEllipse(leafConturPen,
+                                 plant.MyCoordinate.X - (int) (radiusSmall * 2.5),
+                                 plant.MyCoordinate.Y - radiusSmall * 2,
+                                 2 * radiusSmall,
+                                 2 * radiusSmall);
             //Правая часть
-            _grField.FillEllipse(_leafBrush,
-                                 plant.MyCoordinate.X + (int)(_radiusSmall * 0.5),
-                                 plant.MyCoordinate.Y - _radiusSmall * 2,
-                                 2 * _radiusSmall,
-                                 2 * _radiusSmall);
-            _grField.DrawEllipse(_LeafConturPen,
-                                plant.MyCoordinate.X + (int)(_radiusSmall * 0.5),
-                                plant.MyCoordinate.Y - _radiusSmall * 2,
-                                2 * _radiusSmall,
-                                2 * _radiusSmall);
+            _grField.FillEllipse(leafBrush,
+                                 plant.MyCoordinate.X + (int) (radiusSmall * 0.5),
+                                 plant.MyCoordinate.Y - radiusSmall * 2,
+                                 2 * radiusSmall,
+                                 2 * radiusSmall);
+            _grField.DrawEllipse(leafConturPen,
+                                 plant.MyCoordinate.X + (int) (radiusSmall * 0.5),
+                                 plant.MyCoordinate.Y - radiusSmall * 2,
+                                 2 * radiusSmall,
+                                 2 * radiusSmall);
             //Центральный круг
-            _grField.FillEllipse(_leafBrush,
-                                plant.MyCoordinate.X - _radiusBig - _zoom,
-                                plant.MyCoordinate.Y - (int)(_radiusBig * 2.2),
-                                2 * _radiusBig,
-                                2 * _radiusBig);
-            _grField.DrawEllipse(_LeafConturPen,
-                                plant.MyCoordinate.X - _radiusBig - _zoom,
-                                plant.MyCoordinate.Y - (int)(_radiusBig * 2.2),
-                                2 * _radiusBig,
-                                2 * _radiusBig);
+            _grField.FillEllipse(leafBrush,
+                                 plant.MyCoordinate.X - radiusBig - ZOOM,
+                                 plant.MyCoordinate.Y - (int) (radiusBig * 2.2),
+                                 2 * radiusBig,
+                                 2 * radiusBig);
+            _grField.DrawEllipse(leafConturPen,
+                                 plant.MyCoordinate.X - radiusBig - ZOOM,
+                                 plant.MyCoordinate.Y - (int) (radiusBig * 2.2),
+                                 2 * radiusBig,
+                                 2 * radiusBig);
             //Центральный прямоугольник
-            _grField.FillRectangle(_leafBrush,
-                                plant.MyCoordinate.X - (int)(_radiusSmall * 1.8),
-                                plant.MyCoordinate.Y - _radiusSmall,
-                                _radiusSmall * 3,
-                                _radiusSmall);
-            _grField.DrawLine(_LeafConturPen,
-                                plant.MyCoordinate.X - (int)(_radiusSmall * 1.6),
-                                plant.MyCoordinate.Y,
-                                plant.MyCoordinate.X + (int)(_radiusSmall * 1.6),
-                                plant.MyCoordinate.Y);
-
+            _grField.FillRectangle(leafBrush,
+                                   plant.MyCoordinate.X - (int) (radiusSmall * 1.8),
+                                   plant.MyCoordinate.Y - radiusSmall,
+                                   radiusSmall * 3,
+                                   radiusSmall);
+            _grField.DrawLine(leafConturPen,
+                              plant.MyCoordinate.X - (int) (radiusSmall * 1.6),
+                              plant.MyCoordinate.Y,
+                              plant.MyCoordinate.X + (int) (radiusSmall * 1.6),
+                              plant.MyCoordinate.Y);
         }
 
         private void DrawPlantTree(PlantTree plant)
         {
-            var zoom = _zoom * plant.Health / PlantTree.MaxHealth;
-            var _leafBrush = Brushes.YellowGreen;
-            var _LeafConturPen = new Pen(Color.Black, 2);
-            var _woodPen = new Pen(Color.Maroon, 4);
-            int _radiusSmall = 4 * _zoom;
-            int _radiusMedium = 6 * _zoom;
-            int _radiusBig = 10 * _zoom;
-            int _lengh = 30 * _zoom;
+            Brush leafBrush = Brushes.YellowGreen;
+            var leafConturPen = new Pen(Color.Black,
+                                        2);
+            var woodPen = new Pen(Color.Maroon,
+                                  4);
+            const int radiusSmall = 4 * ZOOM;
+            const int radiusMedium = 6 * ZOOM;
+            const int radiusBig = 10 * ZOOM;
+            const int lengh = 30 * ZOOM;
 
             //Ствол
-            _grField.DrawLine(_woodPen,
-                                plant.MyCoordinate.X,
-                                plant.MyCoordinate.Y,
-                                plant.MyCoordinate.X,
-                                plant.MyCoordinate.Y - _lengh);
+            _grField.DrawLine(woodPen,
+                              plant.MyCoordinate.X,
+                              plant.MyCoordinate.Y,
+                              plant.MyCoordinate.X,
+                              plant.MyCoordinate.Y - lengh);
 
-            _grField.DrawLine(_woodPen,
-                            plant.MyCoordinate.X,
-                            plant.MyCoordinate.Y - (int)(_lengh / 3),
-                            plant.MyCoordinate.X + (int)(_lengh / 3),
-                            plant.MyCoordinate.Y - (int)(_lengh *2 / 3));
+            _grField.DrawLine(woodPen,
+                              plant.MyCoordinate.X,
+                              plant.MyCoordinate.Y - lengh / 3,
+                              plant.MyCoordinate.X + lengh / 3,
+                              plant.MyCoordinate.Y - lengh * 2 / 3);
 
-            _grField.DrawLine(_woodPen,
-                            plant.MyCoordinate.X,
-                            plant.MyCoordinate.Y - (int)(_lengh *2 / 3),
-                            plant.MyCoordinate.X + (int)(_lengh / 3),
-                            plant.MyCoordinate.Y - _lengh);
+            _grField.DrawLine(woodPen,
+                              plant.MyCoordinate.X,
+                              plant.MyCoordinate.Y - lengh * 2 / 3,
+                              plant.MyCoordinate.X + lengh / 3,
+                              plant.MyCoordinate.Y - lengh);
 
-            _grField.DrawLine(_woodPen,
-                            plant.MyCoordinate.X,
-                            plant.MyCoordinate.Y - (int)(_lengh * 2 / 3),
-                            plant.MyCoordinate.X - (int)(_lengh / 3),
-                            plant.MyCoordinate.Y - _lengh);
+            _grField.DrawLine(woodPen,
+                              plant.MyCoordinate.X,
+                              plant.MyCoordinate.Y - lengh * 2 / 3,
+                              plant.MyCoordinate.X - lengh / 3,
+                              plant.MyCoordinate.Y - lengh);
             //Листва
             //Большой
-            _grField.FillEllipse(_leafBrush,
-                                plant.MyCoordinate.X - (int)(_radiusBig *2.5),
-                                plant.MyCoordinate.Y - _lengh - _radiusBig*2,
-                                5 * _radiusBig,
-                                2 * _radiusBig);
-            _grField.DrawEllipse(_LeafConturPen,
-                                plant.MyCoordinate.X - (int)(_radiusBig * 2.5),
-                                plant.MyCoordinate.Y - _lengh - _radiusBig * 2,
-                                5 * _radiusBig,
-                                2 * _radiusBig);
+            _grField.FillEllipse(leafBrush,
+                                 plant.MyCoordinate.X - (int) (radiusBig * 2.5),
+                                 plant.MyCoordinate.Y - lengh - radiusBig * 2,
+                                 5 * radiusBig,
+                                 2 * radiusBig);
+            _grField.DrawEllipse(leafConturPen,
+                                 plant.MyCoordinate.X - (int) (radiusBig * 2.5),
+                                 plant.MyCoordinate.Y - lengh - radiusBig * 2,
+                                 5 * radiusBig,
+                                 2 * radiusBig);
             //Правый
-            
-            _grField.FillEllipse(_leafBrush,
-                                plant.MyCoordinate.X + (int)(_lengh / 3) - (int)(_radiusSmall * 2),
-                                plant.MyCoordinate.Y - (int)(_lengh * 2 / 3) - _radiusSmall,
-                                4 * _radiusSmall,
-                                2 * _radiusSmall);
-            _grField.DrawEllipse(_LeafConturPen,
-                                plant.MyCoordinate.X + (int)(_lengh / 3) - (int)(_radiusSmall * 2),
-                                plant.MyCoordinate.Y - (int)(_lengh * 2 / 3) - _radiusSmall,
-                                4 * _radiusSmall,
-                                2 * _radiusSmall);
+            _grField.FillEllipse(leafBrush,
+                                 plant.MyCoordinate.X + lengh / 3 - radiusSmall * 2,
+                                 plant.MyCoordinate.Y - lengh * 2 / 3 - radiusSmall,
+                                 4 * radiusSmall,
+                                 2 * radiusSmall);
+            _grField.DrawEllipse(leafConturPen,
+                                 plant.MyCoordinate.X + lengh / 3 - radiusSmall * 2,
+                                 plant.MyCoordinate.Y - lengh * 2 / 3 - radiusSmall,
+                                 4 * radiusSmall,
+                                 2 * radiusSmall);
             //Правый 2
-            _grField.FillEllipse(_leafBrush,
-                                plant.MyCoordinate.X + (int)(_lengh / 3) - (int)(_radiusMedium * 2),
-                                plant.MyCoordinate.Y - _lengh - _radiusMedium,
-                                4 * _radiusMedium,
-                                2 * _radiusMedium);
-            _grField.DrawEllipse(_LeafConturPen,
-                                plant.MyCoordinate.X + (int)(_lengh / 3) - (int)(_radiusMedium * 2),
-                                plant.MyCoordinate.Y - _lengh - _radiusMedium,
-                                4 * _radiusMedium,
-                                2 * _radiusMedium);
+            _grField.FillEllipse(leafBrush,
+                                 plant.MyCoordinate.X + lengh / 3 - radiusMedium * 2,
+                                 plant.MyCoordinate.Y - lengh - radiusMedium,
+                                 4 * radiusMedium,
+                                 2 * radiusMedium);
+            _grField.DrawEllipse(leafConturPen,
+                                 plant.MyCoordinate.X + lengh / 3 - radiusMedium * 2,
+                                 plant.MyCoordinate.Y - lengh - radiusMedium,
+                                 4 * radiusMedium,
+                                 2 * radiusMedium);
             //Левый
-            _grField.FillEllipse(_leafBrush,
-                                plant.MyCoordinate.X - (int)(_lengh / 3) - (int)(_radiusSmall * 2),
-                                plant.MyCoordinate.Y - _lengh - _radiusSmall,
-                                4 * _radiusSmall,
-                                2 * _radiusSmall);
-            _grField.DrawEllipse(_LeafConturPen,
-                                plant.MyCoordinate.X - (int)(_lengh / 3) - (int)(_radiusSmall * 2),
-                                plant.MyCoordinate.Y - _lengh - _radiusSmall,
-                                4 * _radiusSmall,
-                                2 * _radiusSmall);
-                                
+            _grField.FillEllipse(leafBrush,
+                                 plant.MyCoordinate.X - lengh / 3 - radiusSmall * 2,
+                                 plant.MyCoordinate.Y - lengh - radiusSmall,
+                                 4 * radiusSmall,
+                                 2 * radiusSmall);
+            _grField.DrawEllipse(leafConturPen,
+                                 plant.MyCoordinate.X - lengh / 3 - radiusSmall * 2,
+                                 plant.MyCoordinate.Y - lengh - radiusSmall,
+                                 4 * radiusSmall,
+                                 2 * radiusSmall);
         }
+
+        #endregion
     }
 }

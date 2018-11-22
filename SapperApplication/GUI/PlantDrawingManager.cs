@@ -1,19 +1,25 @@
-﻿using SapperApplication.Components;
-using System;
-using System.Collections.Generic;
+﻿#region Usings
+
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SapperApplication.Components;
+
+#endregion
 
 namespace SapperApplication.GUI
 {
-    class PlantDrawingManager
+    internal class PlantDrawingManager
     {
+        #region Private Members
+
         private Graphics _grField;
         private int _zoom;
 
-        public void Iniatilization(Graphics grField, int zoom)
+        #endregion
+
+        #region  Public Methods
+
+        public void Iniatilization(Graphics grField,
+                                   int zoom)
         {
             _grField = grField;
             _zoom = zoom;
@@ -29,10 +35,14 @@ namespace SapperApplication.GUI
             }
         }
 
+        #endregion
+
+        #region  Private Methods
+
         private void DrawPlantBush(PlantBush plant)
         {
             var userBlack = new Pen(Color.Black,
-                                  2);
+                                    2);
             /*
             _grField.FillEllipse(Brushes.DarkOliveGreen,
                                 _myCoordinate.X - Radius,
@@ -46,5 +56,7 @@ namespace SapperApplication.GUI
                                 2 * Radius);
                                 */
         }
+
+        #endregion
     }
 }
