@@ -40,14 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\DrawableObjects\DrawableObject.cs" />
     <Compile Include="Components\Bryozoa.cs" />
     <Compile Include="Components\Cell.cs" />
-    <Compile Include="Components\PlantBase.cs" />
-    <Compile Include="Components\PlantBush.cs" />
-    <Compile Include="Components\PlantList.cs" />
-    <Compile Include="Components\PlantListItem.cs" />
-    <Compile Include="Components\PlantsFactory.cs" />
-    <Compile Include="Components\PlantTree.cs" />
+    <Compile Include="Components\ObjectDrawers\DrawerFactory.cs" />
+    <Compile Include="Components\DrawableObjects\Plants\PlantBase.cs" />
+    <Compile Include="Components\DrawableObjects\Plants\PlantBush.cs" />
+    <Compile Include="Components\ObjectDrawers\PlantBushDrawer.cs" />
+    <Compile Include="Components\DrawableObjects\Plants\PlantsFactory.cs" />
+    <Compile Include="Components\DrawableObjects\Plants\PlantTree.cs" />
+    <Compile Include="Components\ObjectDrawers\PlantTreeDrawer.cs" />
     <Compile Include="Components\SapperGameUIManager.cs" />
     <Compile Include="Components\ZooGIU.cs" />
     <Compile Include="Components\ZooLogic.cs" />
@@ -71,6 +73,7 @@
       <DependentUpon>SapperForm.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\PlantDrawingManager.cs" />
+    <Compile Include="Interfaces\IDrawer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Components\Sapper.cs" />

@@ -2,6 +2,8 @@
 
 using System.Drawing;
 using SapperApplication.Components;
+using SapperApplication.Components.DrawableObjects;
+using SapperApplication.Components.DrawableObjects.Plants;
 
 #endregion
 

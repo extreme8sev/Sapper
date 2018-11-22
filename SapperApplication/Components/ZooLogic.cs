@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System.Collections.Generic;
+using SapperApplication.Components.DrawableObjects.Plants;
 using SapperApplication.Enums;
 
 #endregion
@@ -9,10 +10,10 @@ namespace SapperApplication.Components
 {
     public class ZooLogic
     {
-        #region Public Members
+        #region Private Members
 
-        public PlantList CurrentPlantList { get; }
-        public LinkedList<PlantBase> Plants { get; }
+        private readonly int _gameFieldHeight;
+        private readonly int _gameFieldWidth;
 
         #endregion
 
@@ -24,32 +25,31 @@ namespace SapperApplication.Components
             SapperPoint = 1000;
             _gameFieldHeight = gameFieldHeight;
             _gameFieldWidth = gameFieldWidth;
-            CurrentPlantList = new PlantList();
-            Plants = new LinkedList<PlantBase>();
+            Plants = new List<PlantBase>();
         }
 
         #endregion
 
         #region  Properties
 
+        public List<PlantBase> Plants { get; }
+
         public int SapperPoint { get; set; }
-
-        #endregion
-
-        #region  Private Properties
-
-        private readonly int _gameFieldHeight;
-        private readonly int _gameFieldWidth;
 
         #endregion
 
         #region  Public Methods
 
-        public void MakePlantAndBush() //Временно
+        public void MakePlantAndBush(int quantity) //Временно
         {
-            var plantsFactory = new PlantsFactory(_gameFieldHeight, _gameFieldWidth);
-            CurrentPlantList.AddNewPlant(plantsFactory.CreateRandom(PlantTypeEnum.Bush));
-            CurrentPlantList.AddNewPlant(plantsFactory.CreateRandom(PlantTypeEnum.Tree));
+            var plantsFactory = new PlantsFactory(_gameFieldHeight,
+                                                  _gameFieldWidth);
+
+            for (int i = 0; i < quantity; i++)
+            {
+                Plants.Add(plantsFactory.CreateRandom(PlantTypeEnum.Bush));
+                Plants.Add(plantsFactory.CreateRandom(PlantTypeEnum.Tree));
+            }
         }
 
         #endregion

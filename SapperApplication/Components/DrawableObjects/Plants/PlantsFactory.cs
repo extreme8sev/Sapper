@@ -1,30 +1,51 @@
-﻿using System;
+﻿#region Usings
+
+using System;
 using System.Drawing;
 using SapperApplication.Enums;
 
-namespace SapperApplication.Components
+#endregion
+
+namespace SapperApplication.Components.DrawableObjects.Plants
 {
     public class PlantsFactory
     {
+        #region Private Members
+
         private readonly int _gameFieldHeight;
         private readonly int _gameFieldWidth;
         private readonly Random _random;
 
-        public PlantsFactory(int gameFieldHeight, int gameFieldWidth)
+        #endregion
+
+        #region  .ctor
+
+        public PlantsFactory(int gameFieldHeight,
+                             int gameFieldWidth)
         {
             _gameFieldHeight = gameFieldHeight;
             _gameFieldWidth = gameFieldWidth;
             _random = new Random();
         }
 
-        public PlantBase Create(PlantTypeEnum plantType, Point plantLocation) => MakePlant(plantType,
-                                                                                           plantLocation);
+        #endregion
+
+        #region  Public Methods
+
+        public PlantBase Create(PlantTypeEnum plantType,
+                                Point plantLocation) => MakePlant(plantType,
+                                                                  plantLocation);
 
         public PlantBase CreateRandom(PlantTypeEnum plantType)
         {
             var plantRandomLocation = GetPlantRandomLocation();
-            return Create(plantType, plantRandomLocation);
+            return Create(plantType,
+                          plantRandomLocation);
         }
+
+        #endregion
+
+        #region  Private Methods
 
         private Point GetPlantRandomLocation()
         {
@@ -37,7 +58,8 @@ namespace SapperApplication.Components
                              y);
         }
 
-        private PlantBase MakePlant(PlantTypeEnum plantType, Point plantLocation)
+        private PlantBase MakePlant(PlantTypeEnum plantType,
+                                    Point plantLocation)
         {
             switch (plantType)
             {
@@ -52,8 +74,12 @@ namespace SapperApplication.Components
             }
         }
 
-        private PlantTree MakeTree(Point plantLocation) => new PlantTree(true, plantLocation);
+        private PlantTree MakeTree(Point plantLocation) => new PlantTree(true,
+                                                                         plantLocation);
 
-        private PlantBush MakeBush(Point plantLocation) => new PlantBush(true, plantLocation);
+        private PlantBush MakeBush(Point plantLocation) => new PlantBush(true,
+                                                                         plantLocation);
+
+        #endregion
     }
 }

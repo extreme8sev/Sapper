@@ -2,42 +2,33 @@
 
 using System.Drawing;
 using System.Threading;
-using SapperApplication.Enums;
 
 #endregion
 
-namespace SapperApplication.Components
+namespace SapperApplication.Components.DrawableObjects.Plants
 {
-    public abstract class PlantBase
+    public abstract class PlantBase : DrawableObject
     {
-        #region Public Members
-
-        public TimerCallback GrownTimerCallback;
-        public Point MyCoordinate;
-        public static int MaxHealth;
-        public static int HealthToGrow;
-
-        #endregion
-
         #region  .ctor
 
         protected PlantBase(bool isFirstGeneration,
-                            Point coord)
+                            Point location)
+            : base(location)
         {
-            IsFistGeneration = isFirstGeneration;
-            MyCoordinate = coord;
-        }
+            IsFistGeneration = isFirstGeneration;        }
 
         #endregion
 
         #region  Properties
 
+        public TimerCallback GrownTimerCallback { get; private set; }
+        public static int MaxHealth { get; protected set; }
+        public static int HealthToGrow { get; protected set; }
+
         public int GrownTime { get; set; }
         public int Health { get; set; }
         public bool IsFistGeneration { get; set; }
         public int Sun { get; set; }
-
-        public abstract PlantTypeEnum PlantType { get; }
 
         #endregion
 

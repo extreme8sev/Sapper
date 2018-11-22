@@ -1,20 +1,19 @@
 ﻿#region Usings
 
 using System.Drawing;
-using SapperApplication.Enums;
 
 #endregion
 
-namespace SapperApplication.Components
+namespace SapperApplication.Components.DrawableObjects.Plants
 {
-    internal class PlantBush : PlantBase
+    public class PlantBush : PlantBase
     {
         #region  .ctor
 
         public PlantBush(bool isFirstGeneration,
-                         Point coord)
+                         Point location)
             : base(isFirstGeneration,
-                   coord)
+                   location)
         {
             MaxHealth = 1000;
             HealthToGrow = MaxHealth * 2;
@@ -22,12 +21,6 @@ namespace SapperApplication.Components
             Sun = 500;
             Initial();
         }
-
-        #endregion
-
-        #region  Properties
-
-        public override PlantTypeEnum PlantType => PlantTypeEnum.Bush;
 
         #endregion
     }

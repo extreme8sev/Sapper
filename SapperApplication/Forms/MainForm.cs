@@ -144,7 +144,7 @@ namespace SapperApplication.Forms
         private void addPlantsButton_Click(object sender,
                                            EventArgs e)
         {
-            CurrentZooLogic.MakePlantAndBush();
+            CurrentZooLogic.MakePlantAndBush(10);
             CurrentZooGUI.DrawAllPlants();
         }
 
