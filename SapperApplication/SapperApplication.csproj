@@ -46,6 +46,7 @@
     <Compile Include="Components\PlantBush.cs" />
     <Compile Include="Components\PlantList.cs" />
     <Compile Include="Components\PlantListItem.cs" />
+    <Compile Include="Components\PlantsFactory.cs" />
     <Compile Include="Components\PlantTree.cs" />
     <Compile Include="Components\SapperGameUIManager.cs" />
     <Compile Include="Components\ZooGIU.cs" />

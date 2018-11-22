@@ -37,9 +37,9 @@ namespace SapperApplication.Components
         public bool IsFistGeneration { get; set; }
         public int Sun { get; set; }
 
-        #endregion
-
         public abstract PlantTypeEnum PlantType { get; }
+
+        #endregion
 
         #region  Public Methods
 

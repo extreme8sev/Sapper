@@ -1,7 +1,7 @@
 ﻿#region Usings
 
-using System;
-using System.Drawing;
+using System.Collections.Generic;
+using SapperApplication.Enums;
 
 #endregion
 
@@ -11,7 +11,8 @@ namespace SapperApplication.Components
     {
         #region Public Members
 
-        public PlantList CurrentPlantList;
+        public PlantList CurrentPlantList { get; }
+        public LinkedList<PlantBase> Plants { get; }
 
         #endregion
 
@@ -21,9 +22,10 @@ namespace SapperApplication.Components
                         int gameFieldHeight)
         {
             SapperPoint = 1000;
-            GameFieldHeight = gameFieldHeight;
-            GameFieldWidth = gameFieldWidth;
+            _gameFieldHeight = gameFieldHeight;
+            _gameFieldWidth = gameFieldWidth;
             CurrentPlantList = new PlantList();
+            Plants = new LinkedList<PlantBase>();
         }
 
         #endregion
@@ -36,32 +38,18 @@ namespace SapperApplication.Components
 
         #region  Private Properties
 
-        private int GameFieldHeight { get; }
-        private int GameFieldWidth { get; }
+        private readonly int _gameFieldHeight;
+        private readonly int _gameFieldWidth;
 
         #endregion
 
         #region  Public Methods
 
-        public void Make10Plants() //Временно
+        public void MakePlantAndBush() //Временно
         {
-            var plantPoint = new Point();
-            var rnd = new Random();
-
-            plantPoint.X = rnd.Next(20,
-                                    GameFieldWidth - 20);
-            plantPoint.Y = rnd.Next(20,
-                                    GameFieldHeight - 2);
-            PlantBase plant = new PlantBush(true,
-                                            plantPoint);
-            CurrentPlantList.AddNewPlant(plant);
-            plantPoint.X = rnd.Next(20,
-                                    GameFieldWidth - 20);
-            plantPoint.Y = rnd.Next(20,
-                                    GameFieldHeight - 2);
-            plant = new PlantTree(true,
-                                  plantPoint);
-            CurrentPlantList.AddNewPlant(plant);
+            var plantsFactory = new PlantsFactory(_gameFieldHeight, _gameFieldWidth);
+            CurrentPlantList.AddNewPlant(plantsFactory.CreateRandom(PlantTypeEnum.Bush));
+            CurrentPlantList.AddNewPlant(plantsFactory.CreateRandom(PlantTypeEnum.Tree));
         }
 
         #endregion
