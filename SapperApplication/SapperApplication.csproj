@@ -50,6 +50,7 @@
     <Compile Include="Components\SapperGameUIManager.cs" />
     <Compile Include="Components\ZooGIU.cs" />
     <Compile Include="Components\ZooLogic.cs" />
+    <Compile Include="Enums\PlantTypeEnum.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

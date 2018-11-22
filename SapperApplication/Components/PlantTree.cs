@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System.Drawing;
+using SapperApplication.Enums;
 
 #endregion
 
@@ -21,6 +22,12 @@ namespace SapperApplication.Components
             Sun = 500;
             Initial();
         }
+
+        #endregion
+
+        #region  Properties
+
+        public override PlantTypeEnum PlantType => PlantTypeEnum.Tree;
 
         #endregion
     }

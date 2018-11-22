@@ -31,15 +31,16 @@
             this.testButton = new System.Windows.Forms.Button();
             this.gameFieldPictureBox = new System.Windows.Forms.PictureBox();
             this.addPlantsButton = new System.Windows.Forms.Button();
-            this.cursorSelector = new System.Windows.Forms.GroupBox();
+            this.cursorSelectorGroupBox = new System.Windows.Forms.GroupBox();
             this.cursorType = new System.Windows.Forms.ComboBox();
             this.startTheGameButton = new System.Windows.Forms.Button();
             this.SapperScoreLabel = new System.Windows.Forms.Label();
             this.mainSplitContainer = new System.Windows.Forms.SplitContainer();
             this.innerSplitContainer = new System.Windows.Forms.SplitContainer();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.mainToolboxFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.rightToolboxFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.gameFieldPictureBox)).BeginInit();
-            this.cursorSelector.SuspendLayout();
+            this.cursorSelectorGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainSplitContainer)).BeginInit();
             this.mainSplitContainer.Panel1.SuspendLayout();
             this.mainSplitContainer.Panel2.SuspendLayout();
@@ -48,7 +49,8 @@
             this.innerSplitContainer.Panel1.SuspendLayout();
             this.innerSplitContainer.Panel2.SuspendLayout();
             this.innerSplitContainer.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.mainToolboxFlowPanel.SuspendLayout();
+            this.rightToolboxFlowPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // testButton
@@ -67,7 +69,7 @@
             this.gameFieldPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gameFieldPictureBox.Location = new System.Drawing.Point(0, 0);
             this.gameFieldPictureBox.Name = "gameFieldPictureBox";
-            this.gameFieldPictureBox.Size = new System.Drawing.Size(911, 485);
+            this.gameFieldPictureBox.Size = new System.Drawing.Size(923, 485);
             this.gameFieldPictureBox.TabIndex = 1;
             this.gameFieldPictureBox.TabStop = false;
             this.gameFieldPictureBox.Click += new System.EventHandler(this.gameFieldPictureBox_Click);
@@ -83,26 +85,26 @@
             this.addPlantsButton.UseVisualStyleBackColor = true;
             this.addPlantsButton.Click += new System.EventHandler(this.addPlantsButton_Click);
             // 
-            // cursorSelector
+            // cursorSelectorGroupBox
             // 
-            this.cursorSelector.Controls.Add(this.cursorType);
-            this.cursorSelector.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cursorSelector.Location = new System.Drawing.Point(0, 0);
-            this.cursorSelector.Name = "cursorSelector";
-            this.cursorSelector.Size = new System.Drawing.Size(202, 485);
-            this.cursorSelector.TabIndex = 3;
-            this.cursorSelector.TabStop = false;
-            this.cursorSelector.Text = "Select your cursor";
+            this.cursorSelectorGroupBox.Controls.Add(this.cursorType);
+            this.cursorSelectorGroupBox.Location = new System.Drawing.Point(3, 3);
+            this.cursorSelectorGroupBox.Name = "cursorSelectorGroupBox";
+            this.cursorSelectorGroupBox.Size = new System.Drawing.Size(200, 45);
+            this.cursorSelectorGroupBox.TabIndex = 3;
+            this.cursorSelectorGroupBox.TabStop = false;
+            this.cursorSelectorGroupBox.Text = "Select your cursor";
             // 
             // cursorType
             // 
+            this.cursorType.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cursorType.FormattingEnabled = true;
             this.cursorType.Items.AddRange(new object[] {
             "Cursor",
             "Create bryozoa"});
-            this.cursorType.Location = new System.Drawing.Point(9, 19);
+            this.cursorType.Location = new System.Drawing.Point(3, 16);
             this.cursorType.Name = "cursorType";
-            this.cursorType.Size = new System.Drawing.Size(185, 21);
+            this.cursorType.Size = new System.Drawing.Size(194, 21);
             this.cursorType.TabIndex = 1;
             // 
             // startTheGameButton
@@ -135,12 +137,12 @@
             // 
             // mainSplitContainer.Panel1
             // 
-            this.mainSplitContainer.Panel1.Controls.Add(this.flowLayoutPanel1);
+            this.mainSplitContainer.Panel1.Controls.Add(this.mainToolboxFlowPanel);
             // 
             // mainSplitContainer.Panel2
             // 
             this.mainSplitContainer.Panel2.Controls.Add(this.innerSplitContainer);
-            this.mainSplitContainer.Size = new System.Drawing.Size(1117, 527);
+            this.mainSplitContainer.Size = new System.Drawing.Size(1134, 527);
             this.mainSplitContainer.SplitterDistance = 38;
             this.mainSplitContainer.TabIndex = 6;
             // 
@@ -157,37 +159,47 @@
             // 
             // innerSplitContainer.Panel2
             // 
-            this.innerSplitContainer.Panel2.Controls.Add(this.cursorSelector);
-            this.innerSplitContainer.Size = new System.Drawing.Size(1117, 485);
-            this.innerSplitContainer.SplitterDistance = 911;
+            this.innerSplitContainer.Panel2.Controls.Add(this.rightToolboxFlowPanel);
+            this.innerSplitContainer.Size = new System.Drawing.Size(1134, 485);
+            this.innerSplitContainer.SplitterDistance = 923;
             this.innerSplitContainer.TabIndex = 7;
             // 
-            // flowLayoutPanel1
+            // mainToolboxFlowPanel
             // 
-            this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanel1.Controls.Add(this.testButton);
-            this.flowLayoutPanel1.Controls.Add(this.addPlantsButton);
-            this.flowLayoutPanel1.Controls.Add(this.startTheGameButton);
-            this.flowLayoutPanel1.Controls.Add(this.SapperScoreLabel);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1117, 38);
-            this.flowLayoutPanel1.TabIndex = 0;
+            this.mainToolboxFlowPanel.AutoSize = true;
+            this.mainToolboxFlowPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.mainToolboxFlowPanel.Controls.Add(this.testButton);
+            this.mainToolboxFlowPanel.Controls.Add(this.addPlantsButton);
+            this.mainToolboxFlowPanel.Controls.Add(this.startTheGameButton);
+            this.mainToolboxFlowPanel.Controls.Add(this.SapperScoreLabel);
+            this.mainToolboxFlowPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainToolboxFlowPanel.Location = new System.Drawing.Point(0, 0);
+            this.mainToolboxFlowPanel.Name = "mainToolboxFlowPanel";
+            this.mainToolboxFlowPanel.Size = new System.Drawing.Size(1134, 38);
+            this.mainToolboxFlowPanel.TabIndex = 0;
+            // 
+            // rightToolboxFlowPanel
+            // 
+            this.rightToolboxFlowPanel.Controls.Add(this.cursorSelectorGroupBox);
+            this.rightToolboxFlowPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rightToolboxFlowPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.rightToolboxFlowPanel.Location = new System.Drawing.Point(0, 0);
+            this.rightToolboxFlowPanel.Name = "rightToolboxFlowPanel";
+            this.rightToolboxFlowPanel.Size = new System.Drawing.Size(207, 485);
+            this.rightToolboxFlowPanel.TabIndex = 0;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1117, 527);
+            this.ClientSize = new System.Drawing.Size(1134, 527);
             this.Controls.Add(this.mainSplitContainer);
             this.Name = "MainForm";
             this.Text = "The Game Application";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gameFieldPictureBox)).EndInit();
-            this.cursorSelector.ResumeLayout(false);
+            this.cursorSelectorGroupBox.ResumeLayout(false);
             this.mainSplitContainer.Panel1.ResumeLayout(false);
             this.mainSplitContainer.Panel1.PerformLayout();
             this.mainSplitContainer.Panel2.ResumeLayout(false);
@@ -197,8 +209,9 @@
             this.innerSplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.innerSplitContainer)).EndInit();
             this.innerSplitContainer.ResumeLayout(false);
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
+            this.mainToolboxFlowPanel.ResumeLayout(false);
+            this.mainToolboxFlowPanel.PerformLayout();
+            this.rightToolboxFlowPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -208,13 +221,14 @@
         private System.Windows.Forms.Button testButton;
         private System.Windows.Forms.PictureBox gameFieldPictureBox;
         private System.Windows.Forms.Button addPlantsButton;
-        private System.Windows.Forms.GroupBox cursorSelector;
+        private System.Windows.Forms.GroupBox cursorSelectorGroupBox;
         private System.Windows.Forms.ComboBox cursorType;
         private System.Windows.Forms.Button startTheGameButton;
         private System.Windows.Forms.Label SapperScoreLabel;
         private System.Windows.Forms.SplitContainer mainSplitContainer;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel mainToolboxFlowPanel;
         private System.Windows.Forms.SplitContainer innerSplitContainer;
+        private System.Windows.Forms.FlowLayoutPanel rightToolboxFlowPanel;
     }
 }
 

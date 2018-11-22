@@ -16,6 +16,8 @@ namespace SapperApplication.Forms
 
         private const string TITLE_TEXT = "The Game Application";
 
+        private const string NULL_TEXT = "null";
+
         private Bryozoa[] _bryozoaList;
         private Graphics _gameFieldGraph;
         private int _startX = -10;
@@ -57,12 +59,8 @@ namespace SapperApplication.Forms
         #region  Private Methods
 
         private void MainForm_Load(object sender,
-                                EventArgs e)
+                                   EventArgs e)
         {
-            gameFieldPictureBox.Height = 650;
-            gameFieldPictureBox.Width = 1120;
-            cursorSelector.Left = 1150;
-            cursorSelector.Top = 50;
             cursorType.SelectedItem = cursorType.Items[0];
             _gameFieldGraph = Graphics.FromHwnd(gameFieldPictureBox.Handle);
             CurrentZooLogic = new ZooLogic(gameFieldPictureBox.Width,
@@ -85,7 +83,7 @@ namespace SapperApplication.Forms
         }
 
         private void testButton_Click(object sender,
-                                   EventArgs e)
+                                      EventArgs e)
         {
             var userBlack = new Pen(Color.Black,
                                     2);
@@ -99,7 +97,7 @@ namespace SapperApplication.Forms
         }
 
         private void gameFieldPictureBox_Click(object sender,
-                                     EventArgs e)
+                                               EventArgs e)
         {
             var cursorCoordination = new Point(Cursor.Position.X - gameFieldPictureBox.Location.X - Left - 8,
                                                Cursor.Position.Y - gameFieldPictureBox.Location.Y - Top - 30);
@@ -131,7 +129,7 @@ namespace SapperApplication.Forms
         }
 
         private void startTheGameButton_Click(object sender,
-                                   EventArgs e)
+                                              EventArgs e)
         {
             var newDiffForm3 = new SapperForm(this);
             newDiffForm3.Show();
@@ -139,18 +137,17 @@ namespace SapperApplication.Forms
         }
 
         private void gameFieldPictureBox_DoubleClick(object sender,
-                                           EventArgs e)
+                                                     EventArgs e)
         {
         }
 
-        private void addPlantsButton_Click(object sender, EventArgs e)
+        private void addPlantsButton_Click(object sender,
+                                           EventArgs e)
         {
             CurrentZooLogic.Make10Plants();
             CurrentZooGUI.DrawAllPlants();
         }
 
         #endregion
-
-        private const string NULL_TEXT = "null";
     }
 }

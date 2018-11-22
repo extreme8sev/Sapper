@@ -2,6 +2,7 @@
 
 using System.Drawing;
 using System.Threading;
+using SapperApplication.Enums;
 
 #endregion
 
@@ -37,6 +38,8 @@ namespace SapperApplication.Components
         public int Sun { get; set; }
 
         #endregion
+
+        public abstract PlantTypeEnum PlantType { get; }
 
         #region  Public Methods
 

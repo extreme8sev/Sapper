@@ -1,6 +1,8 @@
 ﻿#region Usings
 
+using System;
 using System.Drawing;
+using SapperApplication.Enums;
 
 #endregion
 
@@ -75,14 +77,22 @@ namespace SapperApplication.Components
 
         private void DrawPlant(PlantBase plant)
         {
-            switch (plant.GetType().ToString())
+            switch (plant.PlantType)
             {
-                case "SapperApplication.Components.PlantBush":
+                case PlantTypeEnum.Bush:
+                {
                     DrawPlantBush(plant as PlantBush);
                     break;
-                case "SapperApplication.Components.PlantTree":
+                }
+                case PlantTypeEnum.Tree:
+                {
                     DrawPlantTree(plant as PlantTree);
                     break;
+                }
+                default:
+                {
+                    throw new ArgumentOutOfRangeException($"The type {plant.PlantType.ToString()} is not implemented yet");
+                }
             }
         }
 
