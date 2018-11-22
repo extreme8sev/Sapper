@@ -11,14 +11,14 @@ namespace SapperApplication.Components
     {
         #region Private Members
 
-        private readonly Form1 _mainForm;
+        private readonly MainForm _mainForm;
         private readonly ZooLogic _zooLogic;
 
         #endregion
 
         #region  .ctor
 
-        public SapperGameUIManager(Form1 form,
+        public SapperGameUIManager(MainForm form,
                                    ZooLogic zooLogic)
         {
             _mainForm = form;

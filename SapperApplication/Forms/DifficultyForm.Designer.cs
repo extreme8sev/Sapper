@@ -1,6 +1,6 @@
 ﻿namespace SapperApplication.Forms
 {
-    partial class Form2
+    partial class DifficultyForm
     {
         /// <summary>
         /// Required designer variable.

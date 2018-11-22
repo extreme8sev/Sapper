@@ -9,14 +9,14 @@ using SapperApplication.Components;
 
 namespace SapperApplication.Forms
 {
-    public partial class Form3 : Form
+    public partial class SapperForm : Form
     {
         #region Private Members
 
         private const int FIELD_LEFT = 15; //верхний правый угол поля
         private const int FIELD_TOP = 35;
         private const string LEFT_TO_DETERMINE_TEXT = "Осталось обнаружить: ";
-        private readonly Form1 _mainForm;
+        private readonly MainForm _mainForm;
         private Sapper _game1;
         private Graphics _gameFieldGraph;
 
@@ -24,12 +24,12 @@ namespace SapperApplication.Forms
 
         #region  .ctor
 
-        public Form3()
+        public SapperForm()
         {
             InitializeComponent();
         }
 
-        public Form3(Form1 mainForm)
+        public SapperForm(MainForm mainForm)
         {
             InitializeComponent();
             _mainForm = mainForm;

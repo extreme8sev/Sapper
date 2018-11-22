@@ -7,22 +7,22 @@ using System.Windows.Forms;
 
 namespace SapperApplication.Forms
 {
-    public partial class Form2 : Form
+    public partial class DifficultyForm : Form
     {
         #region Private Members
 
-        private readonly Form1 _form1;
+        private readonly MainForm _form1;
 
         #endregion
 
         #region  .ctor
 
-        public Form2()
+        public DifficultyForm()
         {
             InitializeComponent();
         }
 
-        public Form2(Form1 f)
+        public DifficultyForm(MainForm f)
         {
             InitializeComponent();
             _form1 = f;
