@@ -152,7 +152,7 @@ namespace SapperApplication.Forms
         private void addPlantsButton_Click(object sender,
                                            EventArgs e)
         {
-            CurrentZooLogic.MakePlantAndBush(20);
+            CurrentZooLogic.MakePlantAndBush(2);
             CurrentZooGUI.DrawAllPlants();
         }
 

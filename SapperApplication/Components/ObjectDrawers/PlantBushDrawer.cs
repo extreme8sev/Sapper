@@ -16,6 +16,8 @@ namespace SapperApplication.Components.ObjectDrawers
                          DrawableObject objectToDraw,
                          int zoom)
         {
+            #region Manual draw
+            /* Вариант "ручной" прорисовкой
             Brush leafBrush = Brushes.DarkOliveGreen;
             var leafConturPen = new Pen(Color.Black,
                                         2);
@@ -66,8 +68,18 @@ namespace SapperApplication.Components.ObjectDrawers
                                objectToDraw.Location.Y,
                                objectToDraw.Location.X + (int) (radiusSmall * 1.6),
                                objectToDraw.Location.Y);
+                               */
+            #endregion
+
+            #region Imagine draw
+            Image plantImage = Image.FromFile("Bush1.gif");
+            Rectangle plantRectangle = new Rectangle(objectToDraw.Location.X, objectToDraw.Location.Y, 90, 60);
+            drawField.DrawImage(plantImage, plantRectangle);
+            #endregion
+
         }
 
         #endregion
+
     }
 }
