@@ -16,6 +16,8 @@ namespace SapperApplication.Components.ObjectDrawers
                          DrawableObject objectToDraw,
                          int zoom)
         {
+            #region Manual Drawing
+            /*
             Brush leafBrush = Brushes.YellowGreen;
             var leafConturPen = new Pen(Color.Black,
                                         2);
@@ -95,8 +97,32 @@ namespace SapperApplication.Components.ObjectDrawers
                                   objectToDraw.Location.Y - lengh - radiusSmall,
                                   4 * radiusSmall,
                                   2 * radiusSmall);
-        }
+        */
+            #endregion
 
-        #endregion
+            #region Imagine draw
+            const int REAL_IMAGE_HEIGHT = 227;
+            const int REAL_IMAGE_WIDTH = 402;
+            const float INNER_ZOOM = 0.25F;
+
+            var imageHeight = (int)((float)REAL_IMAGE_HEIGHT * INNER_ZOOM * (float)zoom);
+            var halfImageWidth = (int)((float)REAL_IMAGE_WIDTH * INNER_ZOOM * (float)zoom / 2);
+
+            Image plantImage = Image.FromFile(DrawableObject.PICTURES_SOURSE + "Tree.gif");
+            Rectangle plantRectangle = new Rectangle(objectToDraw.Location.X - halfImageWidth,
+                                                    objectToDraw.Location.Y - imageHeight,
+                                                    halfImageWidth * 2,
+                                                    imageHeight);
+            drawField.DrawImage(plantImage, plantRectangle);
+
+            /*Brush leafBrush = Brushes.Red;
+            drawField.FillEllipse(leafBrush,   //Рисует точку, соответствующую собственным координатам куста
+                                  objectToDraw.Location.X,
+                                  objectToDraw.Location.Y,
+                                  5,
+                                  5);*/
+            #endregion
+            #endregion
+        }
+        }
     }
-}

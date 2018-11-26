@@ -25,14 +25,14 @@ namespace SapperApplication.Components
             SapperPoint = 1000;
             _gameFieldHeight = gameFieldHeight;
             _gameFieldWidth = gameFieldWidth;
-            Plants = new List<PlantBase>();
+            Plants = new LinkedList<PlantBase>();
         }
 
         #endregion
 
         #region  Properties
 
-        public List<PlantBase> Plants { get; }
+        public LinkedList<PlantBase> Plants { get; }
 
         public int SapperPoint { get; set; }
 
@@ -47,11 +47,39 @@ namespace SapperApplication.Components
 
             for (int i = 0; i < quantity; i++)
             {
-                Plants.Add(plantsFactory.CreateRandom(PlantTypeEnum.Bush));
-                Plants.Add(plantsFactory.CreateRandom(PlantTypeEnum.Tree));
+                for (var j = 0; j < 5; j++)
+                {
+                    AddPlant(plantsFactory.CreateRandom(PlantTypeEnum.Bush));
+                }
+                AddPlant(plantsFactory.CreateRandom(PlantTypeEnum.Tree));
             }
         }
 
+        public void AddPlant(PlantBase addedPlant)
+        {
+            if (Plants.Count == 0 || addedPlant.Location.Y < Plants.First.Value.Location.Y)
+            {
+                Plants.AddFirst(addedPlant);
+            }
+            else
+            {
+                LinkedListNode<PlantBase> currentPlant = Plants.First;
+                while (true)
+                {
+                    if (addedPlant.Location.Y < currentPlant.Value.Location.Y)
+                    {
+                        Plants.AddBefore(currentPlant, addedPlant);
+                        break;
+                    }
+                    currentPlant = currentPlant.Next;
+                    if (currentPlant == null)
+                    {
+                        Plants.AddLast(addedPlant);
+                        break;
+                    }
+                }
+            }
+        }
         #endregion
     }
 }

@@ -72,9 +72,26 @@ namespace SapperApplication.Components.ObjectDrawers
             #endregion
 
             #region Imagine draw
-            Image plantImage = Image.FromFile("Bush1.gif");
-            Rectangle plantRectangle = new Rectangle(objectToDraw.Location.X, objectToDraw.Location.Y, 90, 60);
+            const int REAL_IMAGE_HEIGHT = 122;
+            const int REAL_IMAGE_WIDTH = 169;
+            const float INNER_ZOOM = 0.12F;
+
+            var imageHeight = (int)((float)REAL_IMAGE_HEIGHT * INNER_ZOOM * (float)zoom);
+            var halfImageWidth = (int)((float)REAL_IMAGE_WIDTH * INNER_ZOOM * (float)zoom / 2);
+
+            Image plantImage = Image.FromFile(DrawableObject.PICTURES_SOURSE + "Bush.gif");
+            Rectangle plantRectangle = new Rectangle(objectToDraw.Location.X - halfImageWidth,
+                                                    objectToDraw.Location.Y - imageHeight,
+                                                    halfImageWidth * 2,
+                                                    imageHeight);
             drawField.DrawImage(plantImage, plantRectangle);
+
+            /* Brush leafBrush = Brushes.Red;
+             drawField.FillEllipse(leafBrush,   //Рисует точку, соответствующую собственным координатам куста
+                                   objectToDraw.Location.X,
+                                   objectToDraw.Location.Y,
+                                   5,
+                                   5);*/
             #endregion
 
         }

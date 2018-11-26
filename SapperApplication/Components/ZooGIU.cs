@@ -43,12 +43,19 @@ namespace SapperApplication.Components
         {
             ClearScreen();
 
+            /*   whyyyy????
             foreach (var plant in _currentZooLogic.Plants.Where(x=>x.GetType() == typeof(PlantBush)))
             {
                 Draw(plant);
             }
 
             foreach (var plant in _currentZooLogic.Plants.Where(x=>x.GetType() == typeof(PlantTree)))
+            {
+                Draw(plant);
+            }
+            */
+
+            foreach (var plant in _currentZooLogic.Plants)
             {
                 Draw(plant);
             }
@@ -60,7 +67,7 @@ namespace SapperApplication.Components
 
         private void ClearScreen()
         {
-            _grField.FillRectangle(Brushes.Goldenrod,
+            _grField.FillRectangle(Brushes.OliveDrab,
                                    0,
                                    0,
                                    _gameFieldWidth,
