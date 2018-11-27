@@ -35,32 +35,34 @@ namespace SapperApplication.Components.ObjectDrawers
 
         public static DrawerFactory Instance => _instance ?? (_instance = new DrawerFactory());
 
-        public IDrawer this[DrawableObject o]
+        /// <summary>
+        /// Returns a drawer by object type, if there is no suitable drawer method throws an exception
+        /// </summary>
+        /// <param name="o">Object inherited from DrawableObject</param>
+        /// <returns>An instance of IDrawer interface</returns>
+        public IDrawer GetDrawer(DrawableObject o)
         {
-            get
+            switch (o)
             {
-                switch (o)
+                case BryozoaActivator _:
                 {
-                    case BryozoaActivator _:
-                    {
-                        return BryozoaActivatorDrawer;
-                    }
-                    case Bryozoa _:
-                    {
-                        return BryozoaDrawer;
-                    }
-                    case PlantBush _:
-                    {
-                        return PlantBushDrawer;
-                    }
-                    case PlantTree _:
-                    {
-                        return PlantTreeDrawer;
-                    }
-                    default:
-                    {
-                        throw new NotSupportedException("This type is not supported yet!");
-                    }
+                    return BryozoaActivatorDrawer;
+                }
+                case Bryozoa _:
+                {
+                    return BryozoaDrawer;
+                }
+                case PlantBush _:
+                {
+                    return PlantBushDrawer;
+                }
+                case PlantTree _:
+                {
+                    return PlantTreeDrawer;
+                }
+                default:
+                {
+                    throw new NotSupportedException("This type is not supported yet!");
                 }
             }
         }

@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using SapperApplication.Components;
 using SapperApplication.Components.DrawableObjects.Bryozoa;
 using SapperApplication.Components.ObjectDrawers;
+using SapperApplication.Interfaces;
 
 #endregion
 
@@ -127,10 +128,10 @@ namespace SapperApplication.Forms
 
                 var bryozoa = _bryozoaList[_bryozoaList.Length - 1];
 
-                DrawerFactory.Instance[bryozoa]
-                             .Draw(_gameFieldGraph,
-                                   bryozoa,
-                                   0);
+                IDrawer drawer = DrawerFactory.Instance.GetDrawer(bryozoa);
+                drawer.Draw(_gameFieldGraph,
+                            bryozoa,
+                            0);
 
                 addPlantsButton.Text = _bryozoaList.Length.ToString();
             }
