@@ -47,6 +47,28 @@ namespace SapperApplication.Components.ObjectDrawers
             {
                 case BryozoaActivator _:
                 {
+<<<<<<< HEAD
+                    case BryozoaActivator _:
+                    {
+                        return BryozoaActivatorDrawer;
+                    }
+                    case Bryozoa _:
+                    {
+                        return BryozoaDrawer;
+                    }
+                    case PlantBush _:
+                    {
+                        return DrawableObjectDrawer;
+                    }
+                    case PlantTree _:
+                    {
+                        return DrawableObjectDrawer;
+                    }
+                    default:
+                    {
+                        throw new NotSupportedException("This type is not supported yet!");
+                    }
+=======
                     return BryozoaActivatorDrawer;
                 }
                 case Bryozoa _:
@@ -55,15 +77,16 @@ namespace SapperApplication.Components.ObjectDrawers
                 }
                 case PlantBush _:
                 {
-                        return DrawableObjectDrawer;
+                    return PlantBushDrawer;
                 }
                 case PlantTree _:
                 {
-                        return DrawableObjectDrawer;
+                    return PlantTreeDrawer;
                 }
                 default:
                 {
                     throw new NotSupportedException("This type is not supported yet!");
+>>>>>>> master
                 }
             }
         }

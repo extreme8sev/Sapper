@@ -5,6 +5,7 @@ using System.Linq;
 using SapperApplication.Components.DrawableObjects;
 using SapperApplication.Components.DrawableObjects.Plants;
 using SapperApplication.Components.ObjectDrawers;
+using SapperApplication.Interfaces;
 
 #endregion
 
@@ -76,10 +77,10 @@ namespace SapperApplication.Components
 
         private void Draw(DrawableObject objectToDraw)
         {
-            DrawerFactory.Instance[objectToDraw]
-                         .Draw(_grField,
-                               objectToDraw,
-                               SCALE);
+            IDrawer drawer = DrawerFactory.Instance.GetDrawer(objectToDraw);
+            drawer.Draw(_grField,
+                        objectToDraw,
+                        SCALE);
         }
 
         #endregion
