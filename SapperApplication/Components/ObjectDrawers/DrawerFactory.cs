@@ -19,6 +19,7 @@ namespace SapperApplication.Components.ObjectDrawers
         private BryozoaDrawer _bryozoaDrawer;
         private PlantBushDrawer _plantBushDrawer;
         private PlantTreeDrawer _plantTreeDrawer;
+        private DrawableObjectDrawer _drawableObjectDrawer;
 
         #endregion
 
@@ -51,11 +52,11 @@ namespace SapperApplication.Components.ObjectDrawers
                     }
                     case PlantBush _:
                     {
-                        return PlantBushDrawer;
+                        return DrawableObjectDrawer;
                     }
                     case PlantTree _:
                     {
-                        return PlantTreeDrawer;
+                        return DrawableObjectDrawer;
                     }
                     default:
                     {
@@ -74,6 +75,7 @@ namespace SapperApplication.Components.ObjectDrawers
         protected PlantTreeDrawer PlantTreeDrawer => _plantTreeDrawer ?? (_plantTreeDrawer = new PlantTreeDrawer());
         protected PlantBushDrawer PlantBushDrawer => _plantBushDrawer ?? (_plantBushDrawer = new PlantBushDrawer());
         protected BryozoaDrawer BryozoaDrawer => _bryozoaDrawer ?? (_bryozoaDrawer = new BryozoaDrawer());
+        protected DrawableObjectDrawer DrawableObjectDrawer => _drawableObjectDrawer ?? (_drawableObjectDrawer = new DrawableObjectDrawer());
 
         #endregion
     }

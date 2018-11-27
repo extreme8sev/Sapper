@@ -23,5 +23,6 @@ namespace SapperApplication.Components.DrawableObjects
         public Point Location { get; }
 
         #endregion
+
     }
 }

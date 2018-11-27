@@ -3,6 +3,7 @@
 using System.Drawing;
 using SapperApplication.Components.DrawableObjects;
 using SapperApplication.Interfaces;
+using SapperApplication.Properties;
 
 #endregion
 
@@ -72,14 +73,13 @@ namespace SapperApplication.Components.ObjectDrawers
             #endregion
 
             #region Imagine draw
-            const int REAL_IMAGE_HEIGHT = 122;
-            const int REAL_IMAGE_WIDTH = 169;
             const float INNER_ZOOM = 0.12F;
 
-            var imageHeight = (int)((float)REAL_IMAGE_HEIGHT * INNER_ZOOM * (float)zoom);
-            var halfImageWidth = (int)((float)REAL_IMAGE_WIDTH * INNER_ZOOM * (float)zoom / 2);
+            Image plantImage = Resources.BushImage;
 
-            Image plantImage = Image.FromFile(DrawableObject.PICTURES_SOURSE + "Bush.gif");
+            var imageHeight = (int)((float)plantImage.Height * INNER_ZOOM * (float)zoom);
+            var halfImageWidth = (int)((float)plantImage.Width* INNER_ZOOM * (float)zoom / 2);
+
             Rectangle plantRectangle = new Rectangle(objectToDraw.Location.X - halfImageWidth,
                                                     objectToDraw.Location.Y - imageHeight,
                                                     halfImageWidth * 2,

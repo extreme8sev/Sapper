@@ -49,6 +49,7 @@
     <Compile Include="Components\ObjectDrawers\DrawerFactory.cs" />
     <Compile Include="Components\DrawableObjects\Plants\PlantBase.cs" />
     <Compile Include="Components\DrawableObjects\Plants\PlantBush.cs" />
+    <Compile Include="Components\ObjectDrawers\DrawableObjectDrawer.cs" />
     <Compile Include="Components\ObjectDrawers\PlantBushDrawer.cs" />
     <Compile Include="Components\DrawableObjects\Plants\PlantsFactory.cs" />
     <Compile Include="Components\DrawableObjects\Plants\PlantTree.cs" />
@@ -99,6 +100,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -111,6 +113,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\Bush.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\Tree.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
