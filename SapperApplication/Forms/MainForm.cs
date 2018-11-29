@@ -159,8 +159,11 @@ namespace SapperApplication.Forms
 
         private void PlantInfo_Click(object sender, EventArgs e)
         {
-            var newInfoForm = new PlantInfoForm(CurrentZooLogic);
-            newInfoForm.Show();
+            if (CurrentZooLogic != null)
+            {
+                var newInfoForm = new PlantInfoForm(CurrentZooLogic);
+                newInfoForm.Show();
+            }
         }
     }
 }

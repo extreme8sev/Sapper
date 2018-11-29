@@ -16,7 +16,7 @@ namespace SapperApplication.Forms
     public partial class PlantInfoForm : Form
     {
         private int _currentPlantNumber;
-        private const int ZOOM = 10;
+        private const int ZOOM = 3;
         private LinkedListNode<PlantBase> _currentPlant;
         private readonly Graphics _gameFieldGraph;
         private readonly ZooLogic _currentZooLogic;
@@ -31,7 +31,7 @@ namespace SapperApplication.Forms
             _currentZooLogic = currentZooLogic;
             _gameFieldGraph = Graphics.FromHwnd(plantPictureBox.Handle);
             _graphixX = plantPictureBox.Height/2;
-            _graphixY = plantPictureBox.Width;
+            _graphixY = plantPictureBox.Width/2;
             _drawer = new DrawableObjectDrawer();
         }
 
@@ -53,7 +53,7 @@ namespace SapperApplication.Forms
                      "/" + _currentZooLogic.Plants.Count.ToString();
             PlantTypeLabel.Text = _currentPlant.Value.GetType().ToString();
             CoordinateLabel.Text = "Coordinate: x:" + _currentPlant.Value.Location.X +
-                                    "; y:" + _currentPlant.Value.Location.X;
+                                    "; y:" + _currentPlant.Value.Location.Y;
             HealthLabel.Text = "Health: " + _currentPlant.Value.Health; 
             _drawer.DrawOnCoorinate(_gameFieldGraph, _currentPlant.Value, ZOOM, _graphixX, _graphixY);
         }
