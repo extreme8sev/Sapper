@@ -56,16 +56,22 @@ namespace SapperApplication.Components.DrawableObjects.Plants
 
         public void GrowUp(object obj)
         {
+            //GiveOffspring();
             Health += Sun;
             if (Health >= HealthToGrow)
             {
                 Health = MaxHealth;
                 GiveOffspring();
             }
+            
         }
+
+        public delegate void GiveOffspringDelegate(int quantity);
+        public event GiveOffspringDelegate GiveOffspringEvent;
 
         public void GiveOffspring()
         {
+            GiveOffspringEvent(1);
         }
 
         #endregion

@@ -36,30 +36,32 @@
             this.startTheGameButton = new System.Windows.Forms.Button();
             this.SapperScoreLabel = new System.Windows.Forms.Label();
             this.mainSplitContainer = new System.Windows.Forms.SplitContainer();
-            this.innerSplitContainer = new System.Windows.Forms.SplitContainer();
             this.mainToolboxFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.InfoLabel = new System.Windows.Forms.Label();
+            this.innerSplitContainer = new System.Windows.Forms.SplitContainer();
             this.rightToolboxFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.PlantInfo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gameFieldPictureBox)).BeginInit();
             this.cursorSelectorGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainSplitContainer)).BeginInit();
             this.mainSplitContainer.Panel1.SuspendLayout();
             this.mainSplitContainer.Panel2.SuspendLayout();
             this.mainSplitContainer.SuspendLayout();
+            this.mainToolboxFlowPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.innerSplitContainer)).BeginInit();
             this.innerSplitContainer.Panel1.SuspendLayout();
             this.innerSplitContainer.Panel2.SuspendLayout();
             this.innerSplitContainer.SuspendLayout();
-            this.mainToolboxFlowPanel.SuspendLayout();
             this.rightToolboxFlowPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // testButton
             // 
-            this.testButton.Location = new System.Drawing.Point(3, 3);
+            this.testButton.Location = new System.Drawing.Point(107, 3);
             this.testButton.Name = "testButton";
             this.testButton.Size = new System.Drawing.Size(116, 34);
             this.testButton.TabIndex = 0;
-            this.testButton.Text = "button1";
+            this.testButton.Text = "ReDraw";
             this.testButton.UseVisualStyleBackColor = true;
             this.testButton.Click += new System.EventHandler(this.testButton_Click);
             // 
@@ -77,7 +79,7 @@
             // 
             // addPlantsButton
             // 
-            this.addPlantsButton.Location = new System.Drawing.Point(125, 3);
+            this.addPlantsButton.Location = new System.Drawing.Point(229, 3);
             this.addPlantsButton.Name = "addPlantsButton";
             this.addPlantsButton.Size = new System.Drawing.Size(116, 34);
             this.addPlantsButton.TabIndex = 2;
@@ -109,7 +111,7 @@
             // 
             // startTheGameButton
             // 
-            this.startTheGameButton.Location = new System.Drawing.Point(247, 3);
+            this.startTheGameButton.Location = new System.Drawing.Point(351, 3);
             this.startTheGameButton.Name = "startTheGameButton";
             this.startTheGameButton.Size = new System.Drawing.Size(112, 34);
             this.startTheGameButton.TabIndex = 4;
@@ -120,7 +122,7 @@
             // SapperScoreLabel
             // 
             this.SapperScoreLabel.AutoSize = true;
-            this.SapperScoreLabel.Location = new System.Drawing.Point(365, 11);
+            this.SapperScoreLabel.Location = new System.Drawing.Point(510, 11);
             this.SapperScoreLabel.Margin = new System.Windows.Forms.Padding(3, 11, 3, 0);
             this.SapperScoreLabel.Name = "SapperScoreLabel";
             this.SapperScoreLabel.Size = new System.Drawing.Size(35, 13);
@@ -146,6 +148,32 @@
             this.mainSplitContainer.SplitterDistance = 38;
             this.mainSplitContainer.TabIndex = 6;
             // 
+            // mainToolboxFlowPanel
+            // 
+            this.mainToolboxFlowPanel.AutoSize = true;
+            this.mainToolboxFlowPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.mainToolboxFlowPanel.Controls.Add(this.PlantInfo);
+            this.mainToolboxFlowPanel.Controls.Add(this.testButton);
+            this.mainToolboxFlowPanel.Controls.Add(this.addPlantsButton);
+            this.mainToolboxFlowPanel.Controls.Add(this.startTheGameButton);
+            this.mainToolboxFlowPanel.Controls.Add(this.InfoLabel);
+            this.mainToolboxFlowPanel.Controls.Add(this.SapperScoreLabel);
+            this.mainToolboxFlowPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainToolboxFlowPanel.Location = new System.Drawing.Point(0, 0);
+            this.mainToolboxFlowPanel.Name = "mainToolboxFlowPanel";
+            this.mainToolboxFlowPanel.Size = new System.Drawing.Size(1134, 38);
+            this.mainToolboxFlowPanel.TabIndex = 0;
+            // 
+            // InfoLabel
+            // 
+            this.InfoLabel.AutoSize = true;
+            this.InfoLabel.Location = new System.Drawing.Point(469, 11);
+            this.InfoLabel.Margin = new System.Windows.Forms.Padding(3, 11, 3, 0);
+            this.InfoLabel.Name = "InfoLabel";
+            this.InfoLabel.Size = new System.Drawing.Size(35, 13);
+            this.InfoLabel.TabIndex = 7;
+            this.InfoLabel.Text = "label1";
+            // 
             // innerSplitContainer
             // 
             this.innerSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -164,20 +192,6 @@
             this.innerSplitContainer.SplitterDistance = 923;
             this.innerSplitContainer.TabIndex = 7;
             // 
-            // mainToolboxFlowPanel
-            // 
-            this.mainToolboxFlowPanel.AutoSize = true;
-            this.mainToolboxFlowPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.mainToolboxFlowPanel.Controls.Add(this.testButton);
-            this.mainToolboxFlowPanel.Controls.Add(this.addPlantsButton);
-            this.mainToolboxFlowPanel.Controls.Add(this.startTheGameButton);
-            this.mainToolboxFlowPanel.Controls.Add(this.SapperScoreLabel);
-            this.mainToolboxFlowPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainToolboxFlowPanel.Location = new System.Drawing.Point(0, 0);
-            this.mainToolboxFlowPanel.Name = "mainToolboxFlowPanel";
-            this.mainToolboxFlowPanel.Size = new System.Drawing.Size(1134, 38);
-            this.mainToolboxFlowPanel.TabIndex = 0;
-            // 
             // rightToolboxFlowPanel
             // 
             this.rightToolboxFlowPanel.Controls.Add(this.cursorSelectorGroupBox);
@@ -187,6 +201,16 @@
             this.rightToolboxFlowPanel.Name = "rightToolboxFlowPanel";
             this.rightToolboxFlowPanel.Size = new System.Drawing.Size(207, 485);
             this.rightToolboxFlowPanel.TabIndex = 0;
+            // 
+            // PlantInfo
+            // 
+            this.PlantInfo.Location = new System.Drawing.Point(3, 3);
+            this.PlantInfo.Name = "PlantInfo";
+            this.PlantInfo.Size = new System.Drawing.Size(98, 32);
+            this.PlantInfo.TabIndex = 8;
+            this.PlantInfo.Text = "Open plant info";
+            this.PlantInfo.UseVisualStyleBackColor = true;
+            this.PlantInfo.Click += new System.EventHandler(this.PlantInfo_Click);
             // 
             // MainForm
             // 
@@ -205,12 +229,12 @@
             this.mainSplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mainSplitContainer)).EndInit();
             this.mainSplitContainer.ResumeLayout(false);
+            this.mainToolboxFlowPanel.ResumeLayout(false);
+            this.mainToolboxFlowPanel.PerformLayout();
             this.innerSplitContainer.Panel1.ResumeLayout(false);
             this.innerSplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.innerSplitContainer)).EndInit();
             this.innerSplitContainer.ResumeLayout(false);
-            this.mainToolboxFlowPanel.ResumeLayout(false);
-            this.mainToolboxFlowPanel.PerformLayout();
             this.rightToolboxFlowPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -229,6 +253,8 @@
         private System.Windows.Forms.FlowLayoutPanel mainToolboxFlowPanel;
         private System.Windows.Forms.SplitContainer innerSplitContainer;
         private System.Windows.Forms.FlowLayoutPanel rightToolboxFlowPanel;
+        private System.Windows.Forms.Label InfoLabel;
+        private System.Windows.Forms.Button PlantInfo;
     }
 }
 

@@ -34,12 +34,14 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\DrawableObject%27sManagers\PlantsBreeingManager.cs" />
     <Compile Include="Components\DrawableObjects\Bryozoa\BryozoaActivator.cs" />
     <Compile Include="Components\DrawableObjects\DrawableObject.cs" />
     <Compile Include="Components\DrawableObjects\Bryozoa\Bryozoa.cs" />
@@ -70,6 +72,12 @@
     <Compile Include="Forms\DifficultyForm.Designer.cs">
       <DependentUpon>DifficultyForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\PlantInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PlantInfoForm.Designer.cs">
+      <DependentUpon>PlantInfoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SapperForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +94,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DifficultyForm.resx">
       <DependentUpon>DifficultyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PlantInfoForm.resx">
+      <DependentUpon>PlantInfoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SapperForm.resx">
       <DependentUpon>SapperForm.cs</DependentUpon>

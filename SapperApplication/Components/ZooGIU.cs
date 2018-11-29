@@ -6,6 +6,7 @@ using SapperApplication.Components.DrawableObjects;
 using SapperApplication.Components.DrawableObjects.Plants;
 using SapperApplication.Components.ObjectDrawers;
 using SapperApplication.Interfaces;
+using System.Collections.Generic;
 
 #endregion
 
@@ -44,21 +45,18 @@ namespace SapperApplication.Components
         {
             ClearScreen();
 
-            /*   whyyyy????
-            foreach (var plant in _currentZooLogic.Plants.Where(x=>x.GetType() == typeof(PlantBush)))
-            {
-                Draw(plant);
-            }
-
-            foreach (var plant in _currentZooLogic.Plants.Where(x=>x.GetType() == typeof(PlantTree)))
+            /*
+            foreach (var plant in _currentZooLogic.Plants)
             {
                 Draw(plant);
             }
             */
 
-            foreach (var plant in _currentZooLogic.Plants)
+            for (LinkedListNode<PlantBase> plant = _currentZooLogic.Plants.First;
+                plant != _currentZooLogic.Plants.Last;
+                plant = plant.Next)
             {
-                Draw(plant);
+                Draw(plant.Value);
             }
         }
 

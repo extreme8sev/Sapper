@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using SapperApplication.Components.DrawableObjects.Plants;
 using SapperApplication.Enums;
+using SapperApplication.Components.DrawableObject_sManagers;
 
 #endregion
 
@@ -14,6 +15,8 @@ namespace SapperApplication.Components
 
         private readonly int _gameFieldHeight;
         private readonly int _gameFieldWidth;
+        private const int MAX_NUMBER_OF_PLANTS = 300;
+
 
         #endregion
 
@@ -26,6 +29,9 @@ namespace SapperApplication.Components
             _gameFieldHeight = gameFieldHeight;
             _gameFieldWidth = gameFieldWidth;
             Plants = new LinkedList<PlantBase>();
+            PlantsBreeingManager.Instance.SetSettings(gameFieldHeight, 
+                                                        gameFieldWidth, 
+                                                        Plants);
         }
 
         #endregion
@@ -47,11 +53,18 @@ namespace SapperApplication.Components
 
             for (int i = 0; i < quantity; i++)
             {
-                for (var j = 0; j < 5; j++)
-                {
-                    AddPlant(plantsFactory.CreateRandom(PlantTypeEnum.Bush));
-                }
-                AddPlant(plantsFactory.CreateRandom(PlantTypeEnum.Tree));
+                    PlantBase plantBush = plantsFactory.CreateRandom(PlantTypeEnum.Bush);
+                    AddPlant(plantBush);
+                    plantBush.GiveOffspringEvent += MakePlantsOffspring;
+            }
+        }
+
+        public void MakePlantsOffspring(int quantity)
+        {
+            if (Plants.Count < MAX_NUMBER_OF_PLANTS)
+            {
+                SapperPoint += 1;
+                MakePlantAndBush(quantity);
             }
         }
 

@@ -16,9 +16,20 @@ namespace SapperApplication.Components.ObjectDrawers
 
         public void Draw(Graphics drawField,
                  DrawableObject objectToDraw,
-                 int zoom)
-        {
+                 int zoom) =>
+            DrawOnCoorinate(drawField,
+                 objectToDraw,
+                 zoom,
+                 objectToDraw.Location.X,
+                 objectToDraw.Location.Y);
+        
 
+        public void DrawOnCoorinate(Graphics drawField,
+                 DrawableObject objectToDraw,
+                 int zoom,
+                 int x,
+                 int y)
+        {
             #region Imagine draw
             float innerZoom;
             Image objectImage;

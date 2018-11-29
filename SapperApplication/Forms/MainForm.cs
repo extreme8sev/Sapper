@@ -23,8 +23,8 @@ namespace SapperApplication.Forms
 
         private Bryozoa[] _bryozoaList;
         private Graphics _gameFieldGraph;
-        private int _startX = -10;
-        private int _startY = -10;
+        //private int _startX = -10;
+        //private int _startY = -10;
 
         #endregion
 
@@ -50,6 +50,10 @@ namespace SapperApplication.Forms
         public void SetSapperScoreLabelText(string setString)
         {
             SapperScoreLabel.Text = setString;
+        }
+        public void SetSapperInfoLabelText(string setString)
+        {
+            InfoLabel.Text = setString;
         }
 
         public void SubscribeByCurrentSapperGameEvent(Sapper currentSapperGame)
@@ -88,15 +92,9 @@ namespace SapperApplication.Forms
         private void testButton_Click(object sender,
                                       EventArgs e)
         {
-            var userBlack = new Pen(Color.Black,
-                                    2);
-            _gameFieldGraph.DrawRectangle(userBlack,
-                                          _startX,
-                                          _startY,
-                                          50,
-                                          50);
-            _startX += 50;
-            _startY += 50;
+            SapperScoreLabel.Text = "Number of plants: " + CurrentZooLogic.Plants.Count.ToString();
+            InfoLabel.Text = "Sapper points: " + CurrentZooLogic.SapperPoint.ToString();
+            CurrentZooGUI.DrawAllPlants();
         }
 
         private void gameFieldPictureBox_Click(object sender,
@@ -158,5 +156,11 @@ namespace SapperApplication.Forms
         }
 
         #endregion
+
+        private void PlantInfo_Click(object sender, EventArgs e)
+        {
+            var newInfoForm = new PlantInfoForm(CurrentZooLogic);
+            newInfoForm.Show();
+        }
     }
 }
