@@ -29,8 +29,8 @@ namespace SapperApplication.Forms
             InitializeComponent();
             _currentZooLogic = currentZooLogic;
             _gameFieldGraph = Graphics.FromHwnd(plantPictureBox.Handle);
-            _graphixX = plantPictureBox.Height/2;
-            _graphixY = plantPictureBox.Width-5;
+            _graphixY = plantPictureBox.Height-5;
+            _graphixX = plantPictureBox.Width/2;
             _drawer = new DrawableObjectDrawer();
         }
 

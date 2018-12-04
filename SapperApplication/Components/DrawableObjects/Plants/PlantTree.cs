@@ -16,12 +16,16 @@ namespace SapperApplication.Components.DrawableObjects.Plants
                    location)
         {
             MaxHealth = 5000;
-            HealthToGrow = (int) (MaxHealth * 1.2);
+            HealthToGrow = MaxHealth * 3;
             GrownTime = 5000;
             Sun = 10;
             Initial();
         }
 
+        override public void GiveOffspring()
+        {
+            GiveOffspringEventInvoke(5);
+        }
         #endregion
     }
 }

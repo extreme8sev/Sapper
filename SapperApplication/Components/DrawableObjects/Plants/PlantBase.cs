@@ -74,9 +74,14 @@ namespace SapperApplication.Components.DrawableObjects.Plants
         public delegate void GiveOffspringDelegate(int quantity);
         public event GiveOffspringDelegate GiveOffspringEvent;
 
-        public void GiveOffspring()
+        virtual public void GiveOffspring()
         {
-            GiveOffspringEvent(1);
+            GiveOffspringEvent?.Invoke(1);
+        }
+
+        public void GiveOffspringEventInvoke(int quantity)
+        {
+            GiveOffspringEvent?.Invoke(quantity);
         }
 
         #endregion

@@ -33,9 +33,9 @@
             this.buttonPrev = new System.Windows.Forms.Button();
             this.buttonNext = new System.Windows.Forms.Button();
             this.plantGroupBox = new System.Windows.Forms.GroupBox();
+            this.HealthLabel = new System.Windows.Forms.Label();
             this.CoordinateLabel = new System.Windows.Forms.Label();
             this.PlantTypeLabel = new System.Windows.Forms.Label();
-            this.HealthLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.plantPictureBox)).BeginInit();
             this.plantGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -54,7 +54,7 @@
             // 
             this.plantPictureBox.Location = new System.Drawing.Point(255, 12);
             this.plantPictureBox.Name = "plantPictureBox";
-            this.plantPictureBox.Size = new System.Drawing.Size(184, 215);
+            this.plantPictureBox.Size = new System.Drawing.Size(296, 215);
             this.plantPictureBox.TabIndex = 3;
             this.plantPictureBox.TabStop = false;
             // 
@@ -90,6 +90,15 @@
             this.plantGroupBox.TabStop = false;
             this.plantGroupBox.Text = "Plant";
             // 
+            // HealthLabel
+            // 
+            this.HealthLabel.AutoSize = true;
+            this.HealthLabel.Location = new System.Drawing.Point(6, 64);
+            this.HealthLabel.Name = "HealthLabel";
+            this.HealthLabel.Size = new System.Drawing.Size(41, 13);
+            this.HealthLabel.TabIndex = 5;
+            this.HealthLabel.Text = "Health:";
+            // 
             // CoordinateLabel
             // 
             this.CoordinateLabel.AutoSize = true;
@@ -108,20 +117,11 @@
             this.PlantTypeLabel.TabIndex = 3;
             this.PlantTypeLabel.Text = "Plant type: ";
             // 
-            // HealthLabel
-            // 
-            this.HealthLabel.AutoSize = true;
-            this.HealthLabel.Location = new System.Drawing.Point(6, 64);
-            this.HealthLabel.Name = "HealthLabel";
-            this.HealthLabel.Size = new System.Drawing.Size(41, 13);
-            this.HealthLabel.TabIndex = 5;
-            this.HealthLabel.Text = "Health:";
-            // 
             // PlantInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(448, 239);
+            this.ClientSize = new System.Drawing.Size(563, 239);
             this.Controls.Add(this.plantGroupBox);
             this.Controls.Add(this.buttonNext);
             this.Controls.Add(this.buttonPrev);
