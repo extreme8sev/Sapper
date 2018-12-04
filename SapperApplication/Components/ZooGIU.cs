@@ -7,6 +7,7 @@ using SapperApplication.Components.DrawableObjects.Plants;
 using SapperApplication.Components.ObjectDrawers;
 using SapperApplication.Interfaces;
 using System.Collections.Generic;
+using System.Threading;
 
 #endregion
 
@@ -21,6 +22,8 @@ namespace SapperApplication.Components
         private readonly int _gameFieldHeight;
         private readonly int _gameFieldWidth;
         private readonly Graphics _grField;
+        private const int TIME_BETWEEN_REDRAVS = 1000;
+        private readonly Timer _redrawTimer;
 
         #endregion
 
@@ -35,25 +38,22 @@ namespace SapperApplication.Components
             _currentZooLogic = currentZooLogic;
             _gameFieldHeight = gameFieldHeight;
             _gameFieldWidth = gameFieldWidth;
+            _redrawTimer = new Timer(RedrawTimerCallback, null, 0, TIME_BETWEEN_REDRAVS);
         }
 
         #endregion
 
         #region  Public Methods
-
+        private void RedrawTimerCallback(object obj)
+        {
+            DrawAllPlants();
+        }
         public void DrawAllPlants()
         {
             ClearScreen();
 
-            /*
-            foreach (var plant in _currentZooLogic.Plants)
-            {
-                Draw(plant);
-            }
-            */
-
             for (LinkedListNode<PlantBase> plant = _currentZooLogic.Plants.First;
-                plant != _currentZooLogic.Plants.Last;
+                plant != null;
                 plant = plant.Next)
             {
                 Draw(plant.Value);

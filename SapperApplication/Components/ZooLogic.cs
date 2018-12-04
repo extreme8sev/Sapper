@@ -32,6 +32,8 @@ namespace SapperApplication.Components
             PlantsBreeingManager.Instance.SetSettings(gameFieldHeight, 
                                                         gameFieldWidth, 
                                                         Plants);
+            PlantsFactory.Instance.Initialize(_gameFieldHeight,
+                                                  _gameFieldWidth);
         }
 
         #endregion
@@ -48,14 +50,14 @@ namespace SapperApplication.Components
 
         public void MakePlantAndBush(int quantity) //Временно
         {
-            var plantsFactory = new PlantsFactory(_gameFieldHeight,
-                                                  _gameFieldWidth);
-
             for (int i = 0; i < quantity; i++)
             {
-                    PlantBase plantBush = plantsFactory.CreateRandom(PlantTypeEnum.Bush);
+                    PlantBase plantBush = PlantsFactory.Instance.CreateRandom(PlantTypeEnum.Bush);
                     AddPlant(plantBush);
                     plantBush.GiveOffspringEvent += MakePlantsOffspring;
+                    PlantBase plantTree = PlantsFactory.Instance.CreateRandom(PlantTypeEnum.Tree);
+                    AddPlant(plantTree);
+                    plantTree.GiveOffspringEvent += MakePlantsOffspring;
             }
         }
 

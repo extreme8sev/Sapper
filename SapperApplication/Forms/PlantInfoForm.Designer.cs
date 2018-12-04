@@ -130,6 +130,7 @@
             this.Name = "PlantInfoForm";
             this.Text = "Plant Info";
             this.Load += new System.EventHandler(this.PlantInfoForm_Load);
+            this.Leave += new System.EventHandler(this.PlantInfoForm_Leave);
             ((System.ComponentModel.ISupportInitialize)(this.plantPictureBox)).EndInit();
             this.plantGroupBox.ResumeLayout(false);
             this.plantGroupBox.PerformLayout();

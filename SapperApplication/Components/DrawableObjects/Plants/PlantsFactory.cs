@@ -12,15 +12,22 @@ namespace SapperApplication.Components.DrawableObjects.Plants
     {
         #region Private Members
 
-        private readonly int _gameFieldHeight;
-        private readonly int _gameFieldWidth;
-        private readonly Random _random;
+        private static PlantsFactory _instance;
+        private int _gameFieldHeight;
+        private int _gameFieldWidth;
+        private Random _random;
 
         #endregion
 
         #region  .ctor
 
-        public PlantsFactory(int gameFieldHeight,
+        private PlantsFactory()
+        {
+            //Singleton because of Random incorrect working in case of multiple creations in same time
+        }
+
+        #endregion
+        public void Initialize(int gameFieldHeight,
                              int gameFieldWidth)
         {
             _gameFieldHeight = gameFieldHeight;
@@ -28,9 +35,8 @@ namespace SapperApplication.Components.DrawableObjects.Plants
             _random = new Random();
         }
 
-        #endregion
-
         #region  Public Methods
+        public static PlantsFactory Instance => _instance ?? (_instance = new PlantsFactory());
 
         public PlantBase Create(PlantTypeEnum plantType,
                                 Point plantLocation) => MakePlant(plantType,

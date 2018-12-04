@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System;
 using System.Drawing;
 using System.Threading;
 
@@ -24,11 +25,14 @@ namespace SapperApplication.Components.DrawableObjects.Plants
         public TimerCallback GrownTimerCallback { get; private set; }
         public static int MaxHealth { get; protected set; }
         public static int HealthToGrow { get; protected set; }
+        public Timer GrownUpTimer { get; protected set; }
 
         public int GrownTime { get; set; }
         public int Health { get; set; }
         public bool IsFistGeneration { get; set; }
         public int Sun { get; set; }
+        public Random Rand { get; protected set; }
+
 
         #endregion
 
@@ -37,11 +41,12 @@ namespace SapperApplication.Components.DrawableObjects.Plants
         public void Initial()
         {
             GrownTimerCallback = GrowUp;
-            var grownUpTimer = new Timer(GrownTimerCallback,
+            GrownUpTimer = new Timer(GrownTimerCallback,
                                          null,
                                          GrownTime,
                                          GrownTime);
             Health = MaxHealth / 4;
+            Rand = new Random();
         }
 
         public int BeEaten(int howMutch)
@@ -57,7 +62,7 @@ namespace SapperApplication.Components.DrawableObjects.Plants
         public void GrowUp(object obj)
         {
             //GiveOffspring();
-            Health += Sun;
+            Health += Sun*Rand.Next(2, 10);
             if (Health >= HealthToGrow)
             {
                 Health = MaxHealth;

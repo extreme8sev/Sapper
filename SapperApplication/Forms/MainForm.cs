@@ -162,7 +162,7 @@ namespace SapperApplication.Forms
             if (CurrentZooLogic != null)
             {
                 var newInfoForm = new PlantInfoForm(CurrentZooLogic);
-                newInfoForm.Show();
+                newInfoForm.ShowDialog();
             }
         }
     }

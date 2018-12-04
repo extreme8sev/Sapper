@@ -15,7 +15,6 @@ namespace SapperApplication.Forms
 {
     public partial class PlantInfoForm : Form
     {
-        private int _currentPlantNumber;
         private const int ZOOM = 3;
         private LinkedListNode<PlantBase> _currentPlant;
         private readonly Graphics _gameFieldGraph;
@@ -31,7 +30,7 @@ namespace SapperApplication.Forms
             _currentZooLogic = currentZooLogic;
             _gameFieldGraph = Graphics.FromHwnd(plantPictureBox.Handle);
             _graphixX = plantPictureBox.Height/2;
-            _graphixY = plantPictureBox.Width/2;
+            _graphixY = plantPictureBox.Width-5;
             _drawer = new DrawableObjectDrawer();
         }
 
@@ -42,19 +41,19 @@ namespace SapperApplication.Forms
 
         private void goToFirstPlant()
         {
-            _currentPlantNumber = 0;
             _currentPlant = _currentZooLogic.Plants.First;
             setInfo();
         }
 
         private void setInfo()
         {
-            plantGroupBox.Text = "Plant " + (_currentPlantNumber + 1).ToString() +
+            plantGroupBox.Text = "Plant " + (GetPlantNumber() + 1).ToString() +
                      "/" + _currentZooLogic.Plants.Count.ToString();
             PlantTypeLabel.Text = _currentPlant.Value.GetType().ToString();
             CoordinateLabel.Text = "Coordinate: x:" + _currentPlant.Value.Location.X +
                                     "; y:" + _currentPlant.Value.Location.Y;
-            HealthLabel.Text = "Health: " + _currentPlant.Value.Health; 
+            HealthLabel.Text = "Health: " + _currentPlant.Value.Health;
+            _gameFieldGraph.Clear(plantPictureBox.BackColor);
             _drawer.DrawOnCoorinate(_gameFieldGraph, _currentPlant.Value, ZOOM, _graphixX, _graphixY);
         }
 
@@ -65,23 +64,37 @@ namespace SapperApplication.Forms
 
         private void buttonPrev_Click(object sender, EventArgs e)
         {
-            if (_currentPlant != _currentZooLogic.Plants.First)
+            if (_currentPlant.Previous != null)
             {
                 _currentPlant = _currentPlant.Previous;
-                _currentPlantNumber--;
                 setInfo();
             }
         }
 
         private void buttonNext_Click(object sender, EventArgs e)
         {
-            if (_currentPlantNumber != _currentZooLogic.Plants.Count && 
-                _currentPlant.Next != null)
+            if (_currentPlant.Next != null)
             {
                 _currentPlant = _currentPlant.Next;
-                _currentPlantNumber++;
                 setInfo();
             }
+        }
+
+        private int GetPlantNumber()
+        {
+            int plantNumber = 0;
+            for (LinkedListNode<PlantBase> plant = _currentZooLogic.Plants.First;
+                plant != _currentPlant;
+                plant = plant.Next)
+            {
+                plantNumber++;
+            }
+            return plantNumber;
+        }
+
+        private void PlantInfoForm_Leave(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

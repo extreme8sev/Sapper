@@ -18,7 +18,7 @@ namespace SapperApplication.Components.DrawableObjects.Plants
             MaxHealth = 1000;
             HealthToGrow = MaxHealth * 2;
             GrownTime = 5000;
-            Sun = 500;
+            Sun = 50;
             Initial();
         }
 

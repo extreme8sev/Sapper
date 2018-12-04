@@ -39,8 +39,8 @@ namespace SapperApplication.Components.ObjectDrawers
             var imageHeight = (int)(objectImage.Height * innerZoom * (float)zoom);
             var halfImageWidth = (int)(objectImage.Width * innerZoom * (float)zoom / 2);
 
-            Rectangle plantRectangle = new Rectangle(objectToDraw.Location.X - halfImageWidth,
-                                                    objectToDraw.Location.Y - imageHeight,
+            Rectangle plantRectangle = new Rectangle(x - halfImageWidth,
+                                                    y - imageHeight,
                                                     halfImageWidth * 2,
                                                     imageHeight);
             drawField.DrawImage(objectImage, plantRectangle);
