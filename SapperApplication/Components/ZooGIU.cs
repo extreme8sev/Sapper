@@ -1,13 +1,12 @@
-﻿#region Usings
+﻿#region
 
+using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
+using System.Threading;
 using SapperApplication.Components.DrawableObjects;
 using SapperApplication.Components.DrawableObjects.Plants;
 using SapperApplication.Components.ObjectDrawers;
 using SapperApplication.Interfaces;
-using System.Collections.Generic;
-using System.Threading;
 
 #endregion
 
@@ -15,18 +14,6 @@ namespace SapperApplication.Components
 {
     public class ZooGIU
     {
-        #region Private Members
-
-        private const int SCALE = 3;
-        private readonly ZooLogic _currentZooLogic;
-        private readonly int _gameFieldHeight;
-        private readonly int _gameFieldWidth;
-        private readonly Graphics _grField;
-        private const int TIME_BETWEEN_REDRAVS = 1000;
-        private readonly Timer _redrawTimer;
-
-        #endregion
-
         #region  .ctor
 
         public ZooGIU(Graphics grField,
@@ -43,18 +30,32 @@ namespace SapperApplication.Components
 
         #endregion
 
+        #region Private Members
+
+        private const int SCALE = 3;
+        private readonly ZooLogic _currentZooLogic;
+        private readonly int _gameFieldHeight;
+        private readonly int _gameFieldWidth;
+        private readonly Graphics _grField;
+        private const int TIME_BETWEEN_REDRAVS = 1000;
+        private readonly Timer _redrawTimer;
+
+        #endregion
+
         #region  Public Methods
+
         private void RedrawTimerCallback(object obj)
         {
             DrawAllPlants();
         }
+
         public void DrawAllPlants()
         {
             ClearScreen();
 
             for (LinkedListNode<PlantBase> plant = _currentZooLogic.Plants.First;
-                plant != null;
-                plant = plant.Next)
+                 plant != null;
+                 plant = plant.Next)
             {
                 Draw(plant.Value);
             }

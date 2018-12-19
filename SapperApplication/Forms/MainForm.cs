@@ -1,4 +1,4 @@
-﻿#region Usings
+﻿#region
 
 using System;
 using System.Drawing;
@@ -15,6 +15,25 @@ namespace SapperApplication.Forms
 {
     public partial class MainForm : Form
     {
+        #region  .ctor
+
+        public MainForm()
+        {
+            InitializeComponent();
+        }
+
+        #endregion
+
+        private void PlantInfo_Click(object sender,
+                                     EventArgs e)
+        {
+            if (CurrentZooLogic != null)
+            {
+                var newInfoForm = new PlantInfoForm(CurrentZooLogic);
+                newInfoForm.ShowDialog();
+            }
+        }
+
         #region Private Members
 
         private const string TITLE_TEXT = "The Game Application";
@@ -22,18 +41,10 @@ namespace SapperApplication.Forms
         private const string NULL_TEXT = "null";
 
         private Bryozoa[] _bryozoaList;
+
         private Graphics _gameFieldGraph;
         //private int _startX = -10;
         //private int _startY = -10;
-
-        #endregion
-
-        #region  .ctor
-
-        public MainForm()
-        {
-            InitializeComponent();
-        }
 
         #endregion
 
@@ -51,6 +62,7 @@ namespace SapperApplication.Forms
         {
             SapperScoreLabel.Text = setString;
         }
+
         public void SetSapperInfoLabelText(string setString)
         {
             InfoLabel.Text = setString;
@@ -85,15 +97,15 @@ namespace SapperApplication.Forms
 
         private void SetWindowTitle()
         {
-            var appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            string appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             Text = $"{TITLE_TEXT} ({appVersion})";
         }
 
         private void testButton_Click(object sender,
                                       EventArgs e)
         {
-            SapperScoreLabel.Text = "Number of plants: " + CurrentZooLogic.Plants.Count.ToString();
-            InfoLabel.Text = "Sapper points: " + CurrentZooLogic.SapperPoint.ToString();
+            SapperScoreLabel.Text = "Number of plants: " + CurrentZooLogic.Plants.Count;
+            InfoLabel.Text = "Sapper points: " + CurrentZooLogic.SapperPoint;
             CurrentZooGUI.DrawAllPlants();
         }
 
@@ -124,7 +136,7 @@ namespace SapperApplication.Forms
                     _bryozoaList = tempArray;
                 }
 
-                var bryozoa = _bryozoaList[_bryozoaList.Length - 1];
+                Bryozoa bryozoa = _bryozoaList[_bryozoaList.Length - 1];
 
                 IDrawer drawer = DrawerFactory.Instance.GetDrawer(bryozoa);
                 drawer.Draw(_gameFieldGraph,
@@ -156,14 +168,5 @@ namespace SapperApplication.Forms
         }
 
         #endregion
-
-        private void PlantInfo_Click(object sender, EventArgs e)
-        {
-            if (CurrentZooLogic != null)
-            {
-                var newInfoForm = new PlantInfoForm(CurrentZooLogic);
-                newInfoForm.ShowDialog();
-            }
-        }
     }
 }

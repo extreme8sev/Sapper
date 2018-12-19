@@ -1,4 +1,4 @@
-﻿#region Usings
+﻿#region
 
 using System;
 using System.Drawing;
@@ -16,7 +16,8 @@ namespace SapperApplication.Components.DrawableObjects.Plants
                             Point location)
             : base(location)
         {
-            IsFistGeneration = isFirstGeneration;        }
+            IsFistGeneration = isFirstGeneration;
+        }
 
         #endregion
 
@@ -33,7 +34,6 @@ namespace SapperApplication.Components.DrawableObjects.Plants
         public int Sun { get; set; }
         public Random Rand { get; protected set; }
 
-
         #endregion
 
         #region  Public Methods
@@ -42,9 +42,9 @@ namespace SapperApplication.Components.DrawableObjects.Plants
         {
             GrownTimerCallback = GrowUp;
             GrownUpTimer = new Timer(GrownTimerCallback,
-                                         null,
-                                         GrownTime,
-                                         GrownTime);
+                                     null,
+                                     GrownTime,
+                                     GrownTime);
             Health = MaxHealth / 4;
             Rand = new Random();
         }
@@ -62,19 +62,19 @@ namespace SapperApplication.Components.DrawableObjects.Plants
         public void GrowUp(object obj)
         {
             //GiveOffspring();
-            Health += Sun*Rand.Next(2, 10);
+            Health += Sun * Rand.Next(2, 10);
             if (Health >= HealthToGrow)
             {
                 Health = MaxHealth;
                 GiveOffspring();
             }
-            
         }
 
         public delegate void GiveOffspringDelegate(int quantity);
+
         public event GiveOffspringDelegate GiveOffspringEvent;
 
-        virtual public void GiveOffspring()
+        public virtual void GiveOffspring()
         {
             GiveOffspringEvent?.Invoke(1);
         }

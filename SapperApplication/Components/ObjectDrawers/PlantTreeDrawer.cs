@@ -1,4 +1,4 @@
-﻿#region Usings
+﻿#region
 
 using System.Drawing;
 using SapperApplication.Components.DrawableObjects;
@@ -17,6 +17,7 @@ namespace SapperApplication.Components.ObjectDrawers
                          int zoom)
         {
             #region Manual Drawing
+
             /*
             Brush leafBrush = Brushes.YellowGreen;
             var leafConturPen = new Pen(Color.Black,
@@ -98,21 +99,23 @@ namespace SapperApplication.Components.ObjectDrawers
                                   4 * radiusSmall,
                                   2 * radiusSmall);
         */
+
             #endregion
 
             #region Imagine draw
+
             const int REAL_IMAGE_HEIGHT = 227;
             const int REAL_IMAGE_WIDTH = 402;
             const float INNER_ZOOM = 0.25F;
 
-            var imageHeight = (int)((float)REAL_IMAGE_HEIGHT * INNER_ZOOM * (float)zoom);
-            var halfImageWidth = (int)((float)REAL_IMAGE_WIDTH * INNER_ZOOM * (float)zoom / 2);
+            var imageHeight = (int) (REAL_IMAGE_HEIGHT * INNER_ZOOM * zoom);
+            var halfImageWidth = (int) (REAL_IMAGE_WIDTH * INNER_ZOOM * zoom / 2);
 
             Image plantImage = Image.FromFile(DrawableObject.PICTURES_SOURSE + "Tree.gif");
-            Rectangle plantRectangle = new Rectangle(objectToDraw.Location.X - halfImageWidth,
-                                                    objectToDraw.Location.Y - imageHeight,
-                                                    halfImageWidth * 2,
-                                                    imageHeight);
+            var plantRectangle = new Rectangle(objectToDraw.Location.X - halfImageWidth,
+                                               objectToDraw.Location.Y - imageHeight,
+                                               halfImageWidth * 2,
+                                               imageHeight);
             drawField.DrawImage(plantImage, plantRectangle);
 
             /*Brush leafBrush = Brushes.Red;
@@ -121,8 +124,10 @@ namespace SapperApplication.Components.ObjectDrawers
                                   objectToDraw.Location.Y,
                                   5,
                                   5);*/
+
             #endregion
+
             #endregion
-        }
         }
     }
+}

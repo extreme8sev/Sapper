@@ -1,7 +1,11 @@
-﻿using System.Drawing;
+﻿#region
+
+using System.Drawing;
 using SapperApplication.Components.DrawableObjects;
 using SapperApplication.Components.DrawableObjects.Bryozoa;
 using SapperApplication.Interfaces;
+
+#endregion
 
 namespace SapperApplication.Components.ObjectDrawers
 {

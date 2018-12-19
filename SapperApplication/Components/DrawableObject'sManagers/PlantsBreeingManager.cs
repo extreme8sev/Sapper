@@ -1,29 +1,30 @@
-﻿using SapperApplication.Components.DrawableObjects.Plants;
-using System;
+﻿#region
+
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SapperApplication.Components.DrawableObjects.Plants;
+
+#endregion
 
 namespace SapperApplication.Components.DrawableObject_sManagers
 {
-    class PlantsBreeingManager
+    internal class PlantsBreeingManager
     {
         private static PlantsBreeingManager _instance;
         private int _gameFieldHeight;
         private int _gameFieldWidth;
         private LinkedList<PlantBase> _plants;
 
-
-        public static PlantsBreeingManager Instance => _instance ?? (_instance = new PlantsBreeingManager());
-
         private PlantsBreeingManager()
         {
             //singleton
         }
 
-        public void SetSettings(int gameFieldHeight, int gameFieldWidth, LinkedList<PlantBase> plants)
+
+        public static PlantsBreeingManager Instance => _instance ?? (_instance = new PlantsBreeingManager());
+
+        public void SetSettings(int gameFieldHeight,
+                                int gameFieldWidth,
+                                LinkedList<PlantBase> plants)
         {
             if (_plants == null)
             {
@@ -33,7 +34,7 @@ namespace SapperApplication.Components.DrawableObject_sManagers
             }
         }
 
-       /* public Point GetCoordinateOfOffspring(Point parentCoordinate, int radiusOfBreeding)
+        /* public Point GetCoordinateOfOffspring(Point parentCoordinate, int radiusOfBreeding)
         {
 
         }*/

@@ -1,4 +1,4 @@
-﻿#region Usings
+﻿#region
 
 using System;
 using SapperApplication.Components.DrawableObjects;
@@ -12,6 +12,15 @@ namespace SapperApplication.Components.ObjectDrawers
 {
     public class DrawerFactory
     {
+        #region  .ctor
+
+        private DrawerFactory()
+        {
+            //singleton
+        }
+
+        #endregion
+
         #region Private Members
 
         private static DrawerFactory _instance;
@@ -23,21 +32,12 @@ namespace SapperApplication.Components.ObjectDrawers
 
         #endregion
 
-        #region  .ctor
-
-        private DrawerFactory()
-        {
-            //singleton
-        }
-
-        #endregion
-
         #region  Properties
 
         public static DrawerFactory Instance => _instance ?? (_instance = new DrawerFactory());
 
         /// <summary>
-        /// Returns a drawer by object type, if there is no suitable drawer method throws an exception
+        ///     Returns a drawer by object type, if there is no suitable drawer method throws an exception
         /// </summary>
         /// <param name="o">Object inherited from DrawableObject</param>
         /// <returns>An instance of IDrawer interface</returns>
@@ -55,11 +55,11 @@ namespace SapperApplication.Components.ObjectDrawers
                 }
                 case PlantBush _:
                 {
-                        return DrawableObjectDrawer;
+                    return DrawableObjectDrawer;
                 }
                 case PlantTree _:
                 {
-                        return DrawableObjectDrawer;
+                    return DrawableObjectDrawer;
                 }
                 default:
                 {

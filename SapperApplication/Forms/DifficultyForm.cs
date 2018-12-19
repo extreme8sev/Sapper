@@ -1,4 +1,4 @@
-﻿#region Usings
+﻿#region
 
 using System;
 using System.Windows.Forms;
@@ -15,6 +15,17 @@ namespace SapperApplication.Forms
 
         #endregion
 
+        #region  Private Methods
+
+        private void button2_Click(object sender,
+                                   EventArgs e)
+        {
+            _form1.Enabled = true;
+            Close();
+        }
+
+        #endregion
+
         #region  .ctor
 
         public DifficultyForm()
@@ -27,17 +38,6 @@ namespace SapperApplication.Forms
             InitializeComponent();
             _form1 = f;
             _form1.Enabled = false;
-        }
-
-        #endregion
-
-        #region  Private Methods
-
-        private void button2_Click(object sender,
-                                   EventArgs e)
-        {
-            _form1.Enabled = true;
-            Close();
         }
 
         #endregion

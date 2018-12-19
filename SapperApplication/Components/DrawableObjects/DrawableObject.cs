@@ -1,4 +1,4 @@
-﻿#region Usings
+﻿#region
 
 using System.Drawing;
 
@@ -18,11 +18,11 @@ namespace SapperApplication.Components.DrawableObjects
         #endregion
 
         #region  Properties
+
         public const string PICTURES_SOURSE = "../../Pictures/";
 
         public Point Location { get; }
 
         #endregion
-
     }
 }

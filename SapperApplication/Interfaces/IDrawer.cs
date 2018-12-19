@@ -1,7 +1,6 @@
-﻿#region Usings
+﻿#region
 
 using System.Drawing;
-using SapperApplication.Components;
 using SapperApplication.Components.DrawableObjects;
 
 #endregion

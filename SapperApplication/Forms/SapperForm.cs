@@ -1,4 +1,4 @@
-﻿#region Usings
+﻿#region
 
 using System;
 using System.Drawing;
@@ -11,6 +11,15 @@ namespace SapperApplication.Forms
 {
     public partial class SapperForm : Form
     {
+        #region  Public Methods
+
+        public void SetLabel1Text(string str)
+        {
+            label1.Text = str;
+        }
+
+        #endregion
+
         #region Private Members
 
         private const int FIELD_LEFT = 15; //верхний правый угол поля
@@ -33,15 +42,6 @@ namespace SapperApplication.Forms
         {
             InitializeComponent();
             _mainForm = mainForm;
-        }
-
-        #endregion
-
-        #region  Public Methods
-
-        public void SetLabel1Text(string str)
-        {
-            label1.Text = str;
         }
 
         #endregion

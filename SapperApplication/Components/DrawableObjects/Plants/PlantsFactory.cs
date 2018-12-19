@@ -1,4 +1,4 @@
-﻿#region Usings
+﻿#region
 
 using System;
 using System.Drawing;
@@ -10,6 +10,23 @@ namespace SapperApplication.Components.DrawableObjects.Plants
 {
     public class PlantsFactory
     {
+        #region  .ctor
+
+        private PlantsFactory()
+        {
+            //Singleton because of Random incorrect working in case of multiple creations in same time
+        }
+
+        #endregion
+
+        public void Initialize(int gameFieldHeight,
+                               int gameFieldWidth)
+        {
+            _gameFieldHeight = gameFieldHeight;
+            _gameFieldWidth = gameFieldWidth;
+            _random = new Random();
+        }
+
         #region Private Members
 
         private static PlantsFactory _instance;
@@ -19,23 +36,8 @@ namespace SapperApplication.Components.DrawableObjects.Plants
 
         #endregion
 
-        #region  .ctor
-
-        private PlantsFactory()
-        {
-            //Singleton because of Random incorrect working in case of multiple creations in same time
-        }
-
-        #endregion
-        public void Initialize(int gameFieldHeight,
-                             int gameFieldWidth)
-        {
-            _gameFieldHeight = gameFieldHeight;
-            _gameFieldWidth = gameFieldWidth;
-            _random = new Random();
-        }
-
         #region  Public Methods
+
         public static PlantsFactory Instance => _instance ?? (_instance = new PlantsFactory());
 
         public PlantBase Create(PlantTypeEnum plantType,
@@ -44,7 +46,7 @@ namespace SapperApplication.Components.DrawableObjects.Plants
 
         public PlantBase CreateRandom(PlantTypeEnum plantType)
         {
-            var plantRandomLocation = GetPlantRandomLocation();
+            Point plantRandomLocation = GetPlantRandomLocation();
             return Create(plantType,
                           plantRandomLocation);
         }
@@ -55,9 +57,9 @@ namespace SapperApplication.Components.DrawableObjects.Plants
 
         private Point GetPlantRandomLocation()
         {
-            var x = _random.Next(20,
+            int x = _random.Next(20,
                                  _gameFieldWidth - 20);
-            var y = _random.Next(20,
+            int y = _random.Next(20,
                                  _gameFieldHeight - 2);
 
             return new Point(x,

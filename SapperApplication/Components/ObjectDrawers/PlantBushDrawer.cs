@@ -1,4 +1,4 @@
-﻿#region Usings
+﻿#region
 
 using System.Drawing;
 using SapperApplication.Components.DrawableObjects;
@@ -18,6 +18,7 @@ namespace SapperApplication.Components.ObjectDrawers
                          int zoom)
         {
             #region Manual draw
+
             /* Вариант "ручной" прорисовкой
             Brush leafBrush = Brushes.DarkOliveGreen;
             var leafConturPen = new Pen(Color.Black,
@@ -70,20 +71,22 @@ namespace SapperApplication.Components.ObjectDrawers
                                objectToDraw.Location.X + (int) (radiusSmall * 1.6),
                                objectToDraw.Location.Y);
                                */
+
             #endregion
 
             #region Imagine draw
+
             const float INNER_ZOOM = 0.12F;
 
             Image plantImage = Resources.BushImage;
 
-            var imageHeight = (int)((float)plantImage.Height * INNER_ZOOM * (float)zoom);
-            var halfImageWidth = (int)((float)plantImage.Width* INNER_ZOOM * (float)zoom / 2);
+            var imageHeight = (int) (plantImage.Height * INNER_ZOOM * zoom);
+            var halfImageWidth = (int) (plantImage.Width * INNER_ZOOM * zoom / 2);
 
-            Rectangle plantRectangle = new Rectangle(objectToDraw.Location.X - halfImageWidth,
-                                                    objectToDraw.Location.Y - imageHeight,
-                                                    halfImageWidth * 2,
-                                                    imageHeight);
+            var plantRectangle = new Rectangle(objectToDraw.Location.X - halfImageWidth,
+                                               objectToDraw.Location.Y - imageHeight,
+                                               halfImageWidth * 2,
+                                               imageHeight);
             drawField.DrawImage(plantImage, plantRectangle);
 
             /* Brush leafBrush = Brushes.Red;
@@ -92,11 +95,10 @@ namespace SapperApplication.Components.ObjectDrawers
                                    objectToDraw.Location.Y,
                                    5,
                                    5);*/
-            #endregion
 
+            #endregion
         }
 
         #endregion
-
     }
 }

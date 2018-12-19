@@ -1,4 +1,4 @@
-﻿#region Usings
+﻿#region
 
 using System.Drawing;
 
@@ -22,10 +22,11 @@ namespace SapperApplication.Components.DrawableObjects.Plants
             Initial();
         }
 
-        override public void GiveOffspring()
+        public override void GiveOffspring()
         {
             GiveOffspringEventInvoke(5);
         }
+
         #endregion
     }
 }

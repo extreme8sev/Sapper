@@ -1,4 +1,4 @@
-﻿#region Usings
+﻿#region
 
 using System.Windows.Forms;
 using SapperApplication.Forms;
@@ -9,13 +9,6 @@ namespace SapperApplication.Components
 {
     public class SapperGameUIManager
     {
-        #region Private Members
-
-        private readonly MainForm _mainForm;
-        private readonly ZooLogic _zooLogic;
-
-        #endregion
-
         #region  .ctor
 
         public SapperGameUIManager(MainForm form,
@@ -24,6 +17,13 @@ namespace SapperApplication.Components
             _mainForm = form;
             _zooLogic = zooLogic;
         }
+
+        #endregion
+
+        #region Private Members
+
+        private readonly MainForm _mainForm;
+        private readonly ZooLogic _zooLogic;
 
         #endregion
 

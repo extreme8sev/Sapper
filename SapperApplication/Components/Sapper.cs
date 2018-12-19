@@ -1,4 +1,4 @@
-﻿#region Usings
+﻿#region
 
 using System;
 using System.Drawing;
@@ -9,6 +9,12 @@ namespace SapperApplication.Components
 {
     public class Sapper
     {
+        #region  Properties
+
+        public int Zalupa { get; set; }
+
+        #endregion
+
         #region Public Members
 
         public delegate void EndingGame(int difficult);
@@ -68,12 +74,6 @@ namespace SapperApplication.Components
             _difficulty = difficulty;
             _numberOfBomb = 30 + difficulty * 10;
         }
-
-        #endregion
-
-        #region  Properties
-
-        public int Zalupa { get; set; }
 
         #endregion
 
@@ -156,8 +156,8 @@ namespace SapperApplication.Components
 
         public int OpenAllNeighbours(Point thisPoint)
         {
-            var x = (thisPoint.X - 5) / SQUARE_F;
-            var y = (thisPoint.Y - 5) / SQUARE_F;
+            int x = (thisPoint.X - 5) / SQUARE_F;
+            int y = (thisPoint.Y - 5) / SQUARE_F;
             if (x >= 0
              && y >= 0
              && x < FIELD_SQ_X
