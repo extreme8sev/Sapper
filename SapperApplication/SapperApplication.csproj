@@ -84,7 +84,6 @@
     <Compile Include="Forms\SapperForm.designer.cs">
       <DependentUpon>SapperForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\PlantDrawingManager.cs" />
     <Compile Include="Interfaces\IDrawer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
