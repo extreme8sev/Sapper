@@ -65,7 +65,6 @@ namespace SapperApplication.Components
         {
             if (Plants.Count < MAX_NUMBER_OF_PLANTS)
             {
-                SapperPoint += 1;
                 MakePlantAndBush(quantity);
             }
         }

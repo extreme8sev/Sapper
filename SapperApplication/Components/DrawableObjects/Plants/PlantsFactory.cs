@@ -42,6 +42,11 @@ namespace SapperApplication.Components.DrawableObjects.Plants
                                 Point plantLocation) => MakePlant(plantType,
                                                                   plantLocation);
 
+       /* public PlantBase CreateOffspring()
+        {
+            return;
+        }*/
+
         public PlantBase CreateRandom(PlantTypeEnum plantType)
         {
             var plantRandomLocation = GetPlantRandomLocation();
@@ -62,6 +67,16 @@ namespace SapperApplication.Components.DrawableObjects.Plants
 
             return new Point(x,
                              y);
+        }
+
+        private Point GetLocationInArea(int areaRadius, Point areaCenter)
+        {
+            var x = _random.Next( areaCenter.X - areaRadius>20? areaCenter.X - areaRadius : 20,
+                     areaCenter.X + areaRadius < _gameFieldWidth ? areaCenter.X + areaRadius : _gameFieldWidth - 20);
+            var y = _random.Next(areaCenter.Y - areaRadius > 20 ? areaCenter.Y - areaRadius : 20,
+                     areaCenter.Y + areaRadius < _gameFieldHeight ? areaCenter.Y + areaRadius : _gameFieldHeight - 2);
+            
+            return new Point(x,y);
         }
 
         private PlantBase MakePlant(PlantTypeEnum plantType,

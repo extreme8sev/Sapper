@@ -22,6 +22,10 @@ namespace SapperApplication.Components.DrawableObjects.Plants
             Initial();
         }
 
+        override public void GiveOffspring()
+        {
+            GiveOffspringEventInvoke(1);
+        }
         #endregion
     }
 }

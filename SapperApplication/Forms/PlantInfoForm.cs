@@ -49,7 +49,7 @@ namespace SapperApplication.Forms
         {
             plantGroupBox.Text = "Plant " + (GetPlantNumber() + 1).ToString() +
                      "/" + _currentZooLogic.Plants.Count.ToString();
-            PlantTypeLabel.Text = _currentPlant.Value.GetType().ToString();
+            PlantTypeLabel.Text = _currentPlant.Value.GetType().Name;// .ToString();
             CoordinateLabel.Text = "Coordinate: x:" + _currentPlant.Value.Location.X +
                                     "; y:" + _currentPlant.Value.Location.Y;
             HealthLabel.Text = "Health: " + _currentPlant.Value.Health;
